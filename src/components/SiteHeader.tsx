@@ -4,13 +4,10 @@ import Link from "next/link";
 export default function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 bg-surface border-b border-white/10">
-      <div className="mx-auto max-w-7xl px-4 flex items-center justify-between h-20">
-        <Link href="/" className="flex items-center gap-3 text-foreground">
+      <div className="mx-auto max-w-7xl px-4 flex items-center justify-between h-16">
+        <Link href="/" className="flex items-center gap-3 text-xl font-semibold text-foreground">
           <Image src="/images/logo.png" alt="Island Skies logo" width={48} height={48} />
-          <div>
-            <div className="text-xl font-semibold leading-tight">Island Skies Astro</div>
-            <div className="text-xs text-muted">Astrophotography by Jeff Watts</div>
-          </div>
+          Island Skies Astro
         </Link>
         <nav className="flex gap-6 text-sm">
           <Link href="/" className="text-foreground hover:text-accent transition-colors">
