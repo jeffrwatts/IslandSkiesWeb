@@ -96,19 +96,27 @@ export default function ImageDetailOverlay({
       </div>
 
       {/* Content: side-by-side in landscape/desktop, stacked in portrait */}
-      <div className="flex-1 flex flex-col landscape:flex-row overflow-hidden min-h-0">
+      <div className="flex-1 flex flex-col landscape:flex-row landscape:justify-center overflow-hidden min-h-0">
         {/* Image section */}
         <div
-          className="relative landscape:flex-1 min-h-0 portrait:w-full portrait:aspect-[4/3] cursor-zoom-in"
+          className="relative min-h-0 portrait:w-full portrait:aspect-[4/3] landscape:h-full landscape:max-w-[calc(100%-20rem)] landscape:flex landscape:items-center landscape:justify-center cursor-zoom-in"
           onClick={() => setZoomOpen(true)}
         >
+          {/* Portrait: fill image with crop */}
           <Image
             src={image.imageUrl}
             alt={image.altText}
             fill
-            className="portrait:object-cover landscape:object-contain"
-            sizes="(max-width: 1024px) 100vw, 60vw"
+            className="object-cover landscape:hidden"
+            sizes="100vw"
             priority
+          />
+          {/* Landscape: in-flow img — container wraps it, eliminating gap */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={image.imageUrl}
+            alt={image.altText}
+            className="hidden landscape:block max-h-full max-w-full object-contain"
           />
 
           {/* Arrows overlaid on image for landscape/desktop */}
