@@ -98,7 +98,7 @@ export default function ImageDetailOverlay({
       <div className="flex-1 flex flex-col landscape:flex-row overflow-hidden min-h-0">
         {/* Image section — flush against panel */}
         <div
-          className="relative flex-1 min-h-0 cursor-zoom-in"
+          className="relative landscape:flex-1 min-h-0 portrait:w-full portrait:aspect-[4/3] cursor-zoom-in"
           onClick={() => setZoomOpen(true)}
         >
           <Image
@@ -112,7 +112,7 @@ export default function ImageDetailOverlay({
         </div>
 
         {/* Metadata panel — flush against image */}
-        <div className="flex-shrink-0 landscape:w-72 xl:w-80 landscape:h-full bg-card overflow-y-auto p-6 landscape:border-l border-white/10">
+        <div className="flex-1 landscape:flex-none landscape:w-72 xl:w-80 bg-card overflow-y-auto p-6 landscape:border-l border-white/10">
           {metadata ? (
             <ImageMetadataPanel metadata={metadata} />
           ) : (
