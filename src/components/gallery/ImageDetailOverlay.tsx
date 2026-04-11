@@ -64,7 +64,7 @@ export default function ImageDetailOverlay({
 
   return (
     <div className="fixed inset-0 z-50 bg-black/95 flex flex-col">
-      {/* Top bar: close, arrows, counter */}
+      {/* Top bar: close + counter (arrows on mobile only) */}
       <div className="flex-shrink-0 flex items-center justify-between px-4 py-2">
         <button
           onClick={onClose}
@@ -74,9 +74,10 @@ export default function ImageDetailOverlay({
           &times;
         </button>
         <div className="flex items-center gap-4">
+          {/* Arrows in top bar for portrait/mobile only */}
           <button
             onClick={goToPrev}
-            className="text-white/50 hover:text-white text-2xl p-1"
+            className="landscape:hidden text-white/50 hover:text-white text-2xl p-1"
             aria-label="Previous image"
           >
             &#8249;
@@ -86,7 +87,7 @@ export default function ImageDetailOverlay({
           </span>
           <button
             onClick={goToNext}
-            className="text-white/50 hover:text-white text-2xl p-1"
+            className="landscape:hidden text-white/50 hover:text-white text-2xl p-1"
             aria-label="Next image"
           >
             &#8250;
@@ -96,7 +97,7 @@ export default function ImageDetailOverlay({
 
       {/* Content: side-by-side in landscape/desktop, stacked in portrait */}
       <div className="flex-1 flex flex-col landscape:flex-row overflow-hidden min-h-0">
-        {/* Image section — flush against panel */}
+        {/* Image section */}
         <div
           className="relative landscape:flex-1 min-h-0 portrait:w-full portrait:aspect-[4/3] cursor-zoom-in"
           onClick={() => setZoomOpen(true)}
@@ -105,13 +106,29 @@ export default function ImageDetailOverlay({
             src={image.imageUrl}
             alt={image.altText}
             fill
-            className="object-contain"
+            className="portrait:object-cover landscape:object-contain"
             sizes="(max-width: 1024px) 100vw, 60vw"
             priority
           />
+
+          {/* Arrows overlaid on image for landscape/desktop */}
+          <button
+            onClick={(e) => { e.stopPropagation(); goToPrev(); }}
+            className="hidden landscape:flex absolute left-2 top-1/2 -translate-y-1/2 z-10 text-white/50 hover:text-white text-4xl p-2"
+            aria-label="Previous image"
+          >
+            &#8249;
+          </button>
+          <button
+            onClick={(e) => { e.stopPropagation(); goToNext(); }}
+            className="hidden landscape:flex absolute right-2 top-1/2 -translate-y-1/2 z-10 text-white/50 hover:text-white text-4xl p-2"
+            aria-label="Next image"
+          >
+            &#8250;
+          </button>
         </div>
 
-        {/* Metadata panel — flush against image */}
+        {/* Metadata panel */}
         <div className="flex-1 landscape:flex-none landscape:w-72 xl:w-80 bg-card overflow-y-auto p-6 landscape:border-l border-white/10">
           {metadata ? (
             <ImageMetadataPanel metadata={metadata} />
