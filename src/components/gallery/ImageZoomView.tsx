@@ -112,6 +112,7 @@ export default function ImageZoomView({
           initialScale={1}
           minScale={1}
           maxScale={maxLibraryScale}
+          centerOnInit
           wheel={{ step: 0.15 }}
           pinch={{ step: 5 }}
           onTransform={(_ref, state) => {
@@ -122,20 +123,13 @@ export default function ImageZoomView({
         >
           <TransformComponent
             wrapperStyle={{ width: "100%", height: "100%" }}
-            contentStyle={{
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               ref={imgRef}
               src={src}
               alt={alt}
-              className="max-w-full max-h-full object-contain"
+              style={{ maxWidth: "100vw", maxHeight: "calc(100vh - 3.5rem)" }}
               onLoad={computeBaseRatio}
             />
           </TransformComponent>
