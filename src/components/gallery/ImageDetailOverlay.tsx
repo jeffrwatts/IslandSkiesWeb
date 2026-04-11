@@ -98,7 +98,7 @@ export default function ImageDetailOverlay({
       <div className="flex-1 flex flex-col landscape:flex-row landscape:items-center landscape:justify-center overflow-hidden min-h-0">
         {/* Image section — flush against panel */}
         <div
-          className="relative flex-1 min-h-0 landscape:flex-none landscape:h-full landscape:max-w-[60%] aspect-[4/3] cursor-zoom-in"
+          className="relative flex-1 min-h-0 cursor-zoom-in"
           onClick={() => setZoomOpen(true)}
         >
           <Image
