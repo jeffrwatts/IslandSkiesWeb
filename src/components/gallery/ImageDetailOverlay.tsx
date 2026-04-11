@@ -95,7 +95,7 @@ export default function ImageDetailOverlay({
       </div>
 
       {/* Content: side-by-side in landscape/desktop, stacked in portrait */}
-      <div className="flex-1 flex flex-col landscape:flex-row landscape:items-center landscape:justify-center overflow-hidden min-h-0">
+      <div className="flex-1 flex flex-col landscape:flex-row overflow-hidden min-h-0">
         {/* Image section — flush against panel */}
         <div
           className="relative flex-1 min-h-0 cursor-zoom-in"
