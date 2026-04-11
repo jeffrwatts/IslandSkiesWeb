@@ -64,8 +64,8 @@ export default function ImageDetailOverlay({
 
   return (
     <div className="fixed inset-0 z-50 bg-black/95 flex flex-col">
-      {/* Close button */}
-      <div className="flex-shrink-0 flex items-center justify-between px-4 py-3">
+      {/* Top bar: close, arrows, counter */}
+      <div className="flex-shrink-0 flex items-center justify-between px-4 py-2">
         <button
           onClick={onClose}
           className="text-white/70 hover:text-white text-3xl leading-none p-1"
@@ -73,51 +73,46 @@ export default function ImageDetailOverlay({
         >
           &times;
         </button>
-        <span className="text-sm text-muted">
-          {currentIndex + 1} / {images.length}
-        </span>
-      </div>
-
-      {/* Content: side-by-side in landscape/desktop, stacked in portrait */}
-      <div className="flex-1 flex flex-col landscape:flex-row overflow-hidden">
-        {/* Image section */}
-        <div className="relative flex-1 flex items-center justify-center min-h-0 landscape:min-h-full">
-          {/* Left arrow */}
+        <div className="flex items-center gap-4">
           <button
             onClick={goToPrev}
-            className="absolute left-2 z-10 text-white/50 hover:text-white text-4xl p-2"
+            className="text-white/50 hover:text-white text-2xl p-1"
             aria-label="Previous image"
           >
             &#8249;
           </button>
-
-          {/* Image - click to zoom */}
-          <div
-            className="relative w-full h-full cursor-zoom-in"
-            onClick={() => setZoomOpen(true)}
-          >
-            <Image
-              src={image.imageUrl}
-              alt={image.altText}
-              fill
-              className="object-contain"
-              sizes="(max-width: 1024px) 100vw, 60vw"
-              priority
-            />
-          </div>
-
-          {/* Right arrow */}
+          <span className="text-sm text-muted tabular-nums">
+            {currentIndex + 1} / {images.length}
+          </span>
           <button
             onClick={goToNext}
-            className="absolute right-2 z-10 text-white/50 hover:text-white text-4xl p-2"
+            className="text-white/50 hover:text-white text-2xl p-1"
             aria-label="Next image"
           >
             &#8250;
           </button>
         </div>
+      </div>
 
-        {/* Metadata panel */}
-        <div className="flex-shrink-0 landscape:w-80 xl:w-96 bg-card overflow-y-auto p-6 border-t landscape:border-t-0 landscape:border-l border-white/10">
+      {/* Content: side-by-side in landscape/desktop, stacked in portrait */}
+      <div className="flex-1 flex flex-col landscape:flex-row overflow-hidden min-h-0">
+        {/* Image section — flush, no padding */}
+        <div
+          className="relative flex-1 min-h-0 cursor-zoom-in"
+          onClick={() => setZoomOpen(true)}
+        >
+          <Image
+            src={image.imageUrl}
+            alt={image.altText}
+            fill
+            className="object-contain"
+            sizes="(max-width: 1024px) 100vw, 60vw"
+            priority
+          />
+        </div>
+
+        {/* Metadata panel — flush against image */}
+        <div className="flex-shrink-0 landscape:w-80 xl:w-96 bg-card overflow-y-auto p-6 landscape:border-l border-white/10">
           {metadata ? (
             <ImageMetadataPanel metadata={metadata} />
           ) : (
