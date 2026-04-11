@@ -96,7 +96,7 @@ export default function ImageDetailOverlay({
       </div>
 
       {/* Content: side-by-side in landscape/desktop, stacked in portrait */}
-      <div className="flex-1 flex flex-col landscape:flex-row landscape:justify-center overflow-hidden min-h-0">
+      <div className="flex-1 flex flex-col landscape:flex-row overflow-hidden min-h-0">
         {/* Image section */}
         <div
           className="relative min-h-0 portrait:w-full portrait:aspect-[4/3] landscape:h-full landscape:max-w-[calc(100%-20rem)] landscape:flex landscape:items-center landscape:justify-center cursor-zoom-in"
@@ -117,6 +117,7 @@ export default function ImageDetailOverlay({
             src={image.imageUrl}
             alt={image.altText}
             className="hidden landscape:block max-h-full max-w-full object-contain"
+            fetchPriority="high"
           />
 
           {/* Arrows overlaid on image for landscape/desktop */}
@@ -137,7 +138,7 @@ export default function ImageDetailOverlay({
         </div>
 
         {/* Metadata panel */}
-        <div className="flex-1 landscape:flex-none landscape:w-72 xl:w-80 bg-card overflow-y-auto p-6 landscape:border-l border-white/10">
+        <div className="flex-1 bg-card overflow-y-auto p-6 landscape:border-l border-white/10">
           {metadata ? (
             <ImageMetadataPanel metadata={metadata} />
           ) : (
