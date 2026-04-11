@@ -14,7 +14,7 @@ export default function ImageCard({
       onClick={onClick}
     >
       <Image
-        src={image.imageUrl}
+        src={image.cloudinaryId}
         alt={image.altText}
         fill
         className="object-cover"

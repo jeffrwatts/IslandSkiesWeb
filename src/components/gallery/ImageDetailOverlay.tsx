@@ -6,6 +6,7 @@ import type { GalleryImage } from "@/data/gallery-images";
 import { getMetadataById } from "@/data/image-metadata";
 import ImageMetadataPanel from "./ImageMetadataPanel";
 import ImageZoomView from "./ImageZoomView";
+import { getCloudinaryUrl } from "@/lib/cloudinary";
 
 export default function ImageDetailOverlay({
   image,
@@ -19,7 +20,13 @@ export default function ImageDetailOverlay({
   onNavigate: (id: string) => void;
 }) {
   const [zoomOpen, setZoomOpen] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const metadata = getMetadataById(image.id);
+
+  // Reset loading state when image changes
+  useEffect(() => {
+    setImageLoaded(false);
+  }, [image.id]);
 
   const currentIndex = images.findIndex((img) => img.id === image.id);
 
@@ -55,7 +62,7 @@ export default function ImageDetailOverlay({
   if (zoomOpen) {
     return (
       <ImageZoomView
-        src={image.imageUrl}
+        src={getCloudinaryUrl(image.cloudinaryId)}
         alt={image.altText}
         onClose={() => setZoomOpen(false)}
       />
@@ -102,22 +109,30 @@ export default function ImageDetailOverlay({
           className="relative min-h-0 portrait:w-full portrait:aspect-[4/3] landscape:h-full landscape:max-w-[calc(100%-20rem)] landscape:flex landscape:items-center landscape:justify-center cursor-zoom-in"
           onClick={() => setZoomOpen(true)}
         >
+          {/* Loading spinner */}
+          {!imageLoaded && (
+            <div className="absolute inset-0 z-10 flex items-center justify-center">
+              <div className="w-8 h-8 border-2 border-white/20 border-t-white/80 rounded-full animate-spin" />
+            </div>
+          )}
           {/* Portrait: fill image with crop */}
           <Image
-            src={image.imageUrl}
+            src={image.cloudinaryId}
             alt={image.altText}
             fill
-            className="object-cover landscape:hidden"
+            className={`object-cover landscape:hidden transition-opacity duration-300 ${imageLoaded ? "opacity-100" : "opacity-0"}`}
             sizes="100vw"
             priority
+            onLoad={() => setImageLoaded(true)}
           />
           {/* Landscape: in-flow img — container wraps it, eliminating gap */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={image.imageUrl}
+            src={getCloudinaryUrl(image.cloudinaryId)}
             alt={image.altText}
-            className="hidden landscape:block max-h-full max-w-full object-contain"
+            className={`hidden landscape:block max-h-full max-w-full object-contain transition-opacity duration-300 ${imageLoaded ? "opacity-100" : "opacity-0"}`}
             fetchPriority="high"
+            onLoad={() => setImageLoaded(true)}
           />
 
           {/* Arrows overlaid on image for landscape/desktop */}

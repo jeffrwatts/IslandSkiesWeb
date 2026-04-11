@@ -1,5 +1,23 @@
 import type { ImageMetadata } from "@/data/image-metadata";
 
+function formatRA(ra: number): string {
+  const h = Math.floor(ra);
+  const mFloat = (ra - h) * 60;
+  const m = Math.floor(mFloat);
+  const s = Math.round((mFloat - m) * 60);
+  return `${h.toString().padStart(2, "0")}h ${m.toString().padStart(2, "0")}m ${s.toString().padStart(2, "0")}s`;
+}
+
+function formatDec(dec: number): string {
+  const sign = dec >= 0 ? "+" : "\u2212";
+  const abs = Math.abs(dec);
+  const d = Math.floor(abs);
+  const mFloat = (abs - d) * 60;
+  const m = Math.floor(mFloat);
+  const s = Math.round((mFloat - m) * 60);
+  return `${sign}${d.toString().padStart(2, "0")}\u00B0 ${m.toString().padStart(2, "0")}\u2032 ${s.toString().padStart(2, "0")}\u2033`;
+}
+
 export default function ImageMetadataPanel({ metadata }: { metadata: ImageMetadata }) {
   return (
     <div className="flex flex-col gap-4">
@@ -11,16 +29,16 @@ export default function ImageMetadataPanel({ metadata }: { metadata: ImageMetada
       </div>
 
       <div className="grid grid-cols-2 gap-3 text-sm">
-        {metadata.ra && (
+        {metadata.ra != null && (
           <div>
             <span className="text-muted">RA</span>
-            <p className="text-foreground">{metadata.ra}</p>
+            <p className="text-foreground">{formatRA(metadata.ra)}</p>
           </div>
         )}
-        {metadata.dec && (
+        {metadata.dec != null && (
           <div>
             <span className="text-muted">Dec</span>
-            <p className="text-foreground">{metadata.dec}</p>
+            <p className="text-foreground">{formatDec(metadata.dec)}</p>
           </div>
         )}
         {metadata.constellation && (
