@@ -78,10 +78,10 @@ export default function ImageDetailOverlay({
         </span>
       </div>
 
-      {/* Content: split view on desktop, stacked on mobile */}
-      <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
+      {/* Content: side-by-side in landscape/desktop, stacked in portrait */}
+      <div className="flex-1 flex flex-col landscape:flex-row overflow-hidden">
         {/* Image section */}
-        <div className="relative flex-1 flex items-center justify-center min-h-0 lg:min-h-full">
+        <div className="relative flex-1 flex items-center justify-center min-h-0 landscape:min-h-full">
           {/* Left arrow */}
           <button
             onClick={goToPrev}
@@ -117,7 +117,7 @@ export default function ImageDetailOverlay({
         </div>
 
         {/* Metadata panel */}
-        <div className="flex-shrink-0 lg:w-80 xl:w-96 bg-card overflow-y-auto p-6 border-t lg:border-t-0 lg:border-l border-white/10">
+        <div className="flex-shrink-0 landscape:w-80 xl:w-96 bg-card overflow-y-auto p-6 border-t landscape:border-t-0 landscape:border-l border-white/10">
           {metadata ? (
             <ImageMetadataPanel metadata={metadata} />
           ) : (
