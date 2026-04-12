@@ -1,10 +1,14 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
 import ArticleImage from "./mdx/ArticleImage";
 import ImageSection from "./mdx/ImageSection";
+import ImageCompare from "./mdx/ImageCompare";
+import ArticleSvg from "./mdx/ArticleSvg";
 
 const components = {
   ArticleImage,
   ImageSection,
+  ImageCompare,
+  ArticleSvg,
 };
 
 export default function ArticleBody({
