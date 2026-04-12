@@ -13,7 +13,9 @@ export default function SiteHeader() {
           <Link href="/" className="text-foreground hover:text-accent transition-colors">
             Gallery
           </Link>
-          <span className="text-muted cursor-default">Articles</span>
+          <Link href="/articles" className="text-foreground hover:text-accent transition-colors">
+            Articles
+          </Link>
           <span className="text-muted cursor-default">About</span>
         </nav>
       </div>

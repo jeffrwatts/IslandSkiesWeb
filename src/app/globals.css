@@ -24,3 +24,65 @@ body {
   background: var(--background);
   color: var(--foreground);
 }
+
+/* Article typography */
+
+.article-content h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+.article-content h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.article-content p {
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: color-mix(in srgb, var(--foreground) 90%, transparent);
+  margin-bottom: 1.5rem;
+}
+
+.article-content ul {
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: color-mix(in srgb, var(--foreground) 90%, transparent);
+  margin-bottom: 1.5rem;
+  margin-left: 1.5rem;
+  list-style-type: disc;
+}
+
+.article-content ol {
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: color-mix(in srgb, var(--foreground) 90%, transparent);
+  margin-bottom: 1.5rem;
+  margin-left: 1.5rem;
+  list-style-type: decimal;
+}
+
+.article-content li {
+  margin-bottom: 0.5rem;
+}
+
+.article-content strong {
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.article-content em {
+  font-style: italic;
+}
+
+.article-content hr {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  border-color: rgba(255, 255, 255, 0.1);
+}
