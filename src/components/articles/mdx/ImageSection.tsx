@@ -19,7 +19,7 @@ export default function ImageSection({
     : "lg:col-start-1 lg:row-start-1";
 
   return (
-    <section className="my-12 lg:my-16 lg:grid lg:grid-cols-2 lg:gap-10 lg:items-center">
+    <section className="my-12 lg:my-16 border-t border-white/10 pt-10 lg:border-0 lg:pt-0 lg:grid lg:grid-cols-2 lg:gap-10 lg:items-center">
       <div className={textCol}>
         {children}
       </div>
