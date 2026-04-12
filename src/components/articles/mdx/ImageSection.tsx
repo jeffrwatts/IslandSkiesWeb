@@ -35,7 +35,7 @@ export default function ImageSection({
           />
         </div>
         {caption && (
-          <figcaption className="mt-2 text-sm text-muted">{caption}</figcaption>
+          <figcaption className="mt-2 text-lg text-muted">{caption}</figcaption>
         )}
       </figure>
     </section>
