@@ -40,26 +40,6 @@
     "sortOrder": null
   },
   {
-    "id": "ic410",
-    "title": "Tadpoles Nebula",
-    "category": "dso",
-    "objectId": "ic410",
-    "region": null,
-    "cloudinaryId": "island-skies-astro/dso/ic410",
-    "altText": "IC 410 - Tadpoles Nebula",
-    "objectName": "Tadpoles Nebula",
-    "catalogId": "IC 410",
-    "ra": 5.3783332999999995,
-    "dec": 33.3666667,
-    "constellation": "Auriga",
-    "objectType": "nebula",
-    "objectSubType": "Emission Nebula",
-    "filename": "ic410.jpg",
-    "width": 4052,
-    "height": 2674,
-    "sortOrder": null
-  },
-  {
     "id": "ic410-tadpoles",
     "title": "Tadpoles Nebula",
     "category": "dso",
@@ -77,7 +57,7 @@
     "filename": "ic410-tadpoles.jpg",
     "width": 4144,
     "height": 2822,
-    "sortOrder": null
+    "sortOrder": 5
   },
   {
     "id": "ic434",
@@ -97,46 +77,6 @@
     "filename": "ic434.jpg",
     "width": 4100,
     "height": 2775,
-    "sortOrder": 3
-  },
-  {
-    "id": "ic4342",
-    "title": "Horsehead Nebula",
-    "category": "dso",
-    "objectId": "ic434",
-    "region": null,
-    "cloudinaryId": "island-skies-astro/dso/ic4342",
-    "altText": "IC 434 - Horsehead Nebula",
-    "objectName": "Horsehead Nebula",
-    "catalogId": "IC 434",
-    "ra": 5.6835778,
-    "dec": -2.4537778,
-    "constellation": "Orion",
-    "objectType": "nebula",
-    "objectSubType": "HII Ionized region",
-    "filename": "ic4342.jpg",
-    "width": 2800,
-    "height": 2800,
-    "sortOrder": null
-  },
-  {
-    "id": "ic4343",
-    "title": "Horsehead Nebula",
-    "category": "dso",
-    "objectId": "ic434",
-    "region": null,
-    "cloudinaryId": "island-skies-astro/dso/ic4343",
-    "altText": "IC 434 - Horsehead Nebula",
-    "objectName": "Horsehead Nebula",
-    "catalogId": "IC 434",
-    "ra": 5.6835778,
-    "dec": -2.4537778,
-    "constellation": "Orion",
-    "objectType": "nebula",
-    "objectSubType": "HII Ionized region",
-    "filename": "ic4343.jpg",
-    "width": 7356,
-    "height": 2780,
     "sortOrder": null
   },
   {
@@ -157,7 +97,7 @@
     "filename": "ic443.jpg",
     "width": 6238,
     "height": 4167,
-    "sortOrder": null
+    "sortOrder": 1
   },
   {
     "id": "ic5146",
@@ -177,26 +117,6 @@
     "filename": "ic5146.jpg",
     "width": 4136,
     "height": 2811,
-    "sortOrder": null
-  },
-  {
-    "id": "m1",
-    "title": "Crab Nebula",
-    "category": "dso",
-    "objectId": "m1",
-    "region": null,
-    "cloudinaryId": "island-skies-astro/dso/m1",
-    "altText": "M 1 - Crab Nebula",
-    "objectName": "Crab Nebula",
-    "catalogId": "M 1",
-    "ra": 5.5755472,
-    "dec": 22.0144722,
-    "constellation": "Taurus",
-    "objectType": "nebula",
-    "objectSubType": "Supernova Remnant",
-    "filename": "m1.jpg",
-    "width": 3907,
-    "height": 2585,
     "sortOrder": null
   },
   {
@@ -297,7 +217,7 @@
     "filename": "m20.jpg",
     "width": 4118,
     "height": 2791,
-    "sortOrder": null
+    "sortOrder": 10
   },
   {
     "id": "m27",
@@ -357,7 +277,7 @@
     "filename": "m31.jpg",
     "width": 6242,
     "height": 4173,
-    "sortOrder": 2
+    "sortOrder": 9
   },
   {
     "id": "m42",
@@ -377,7 +297,7 @@
     "filename": "m42.jpg",
     "width": 4130,
     "height": 2800,
-    "sortOrder": 1
+    "sortOrder": 8
   },
   {
     "id": "m42-2",
@@ -397,7 +317,7 @@
     "filename": "m42-2.jpg",
     "width": 4470,
     "height": 2980,
-    "sortOrder": null
+    "sortOrder": 7
   },
   {
     "id": "m45",
@@ -417,7 +337,7 @@
     "filename": "m45.jpg",
     "width": 4415,
     "height": 2948,
-    "sortOrder": null
+    "sortOrder": 6
   },
   {
     "id": "m51",
@@ -437,7 +357,7 @@
     "filename": "m51.jpg",
     "width": 4120,
     "height": 2800,
-    "sortOrder": 5
+    "sortOrder": null
   },
   {
     "id": "m8",
@@ -497,7 +417,7 @@
     "filename": "ngc1499.jpg",
     "width": 6242,
     "height": 4170,
-    "sortOrder": null
+    "sortOrder": 2
   },
   {
     "id": "ngc1977",
@@ -537,7 +457,7 @@
     "filename": "ngc2237.jpg",
     "width": 5061,
     "height": 3379,
-    "sortOrder": 4
+    "sortOrder": 11
   },
   {
     "id": "ngc2264",
@@ -557,7 +477,7 @@
     "filename": "ngc2264.jpg",
     "width": 3400,
     "height": 2200,
-    "sortOrder": null
+    "sortOrder": 3
   },
   {
     "id": "ngc2359",
