@@ -27,10 +27,7 @@ export default function ArticlesPage() {
             <h2 className="text-xl font-semibold text-foreground mb-2">
               {article.title}
             </h2>
-            <p className="text-muted text-sm mb-3">{article.excerpt}</p>
-            <time className="text-xs text-muted">
-              {new Date(article.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
-            </time>
+            <p className="text-muted text-sm">{article.excerpt}</p>
           </Link>
         ))}
       </div>

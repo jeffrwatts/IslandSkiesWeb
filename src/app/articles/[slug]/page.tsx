@@ -38,7 +38,6 @@ export default async function ArticlePage({
       <ArticleBody
         source={article.content}
         title={article.meta.title}
-        date={article.meta.date}
       />
     </main>
   );

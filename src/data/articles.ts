@@ -5,7 +5,7 @@ import matter from "gray-matter";
 export interface ArticleMeta {
   title: string;
   slug: string;
-  date: string;
+  order: number;
   excerpt: string;
   heroImage?: string;
   tags: string[];
@@ -30,7 +30,7 @@ export function getAllArticles(): ArticleMeta[] {
     return {
       title: data.title,
       slug: data.slug,
-      date: data.date,
+      order: data.order ?? 999,
       excerpt: data.excerpt,
       heroImage: data.heroImage,
       tags: data.tags ?? [],
@@ -38,7 +38,7 @@ export function getAllArticles(): ArticleMeta[] {
     } as ArticleMeta;
   });
 
-  return articles.sort((a, b) => (a.date > b.date ? -1 : 1));
+  return articles.sort((a, b) => a.order - b.order);
 }
 
 export function getArticleBySlug(slug: string): Article | null {
@@ -54,7 +54,7 @@ export function getArticleBySlug(slug: string): Article | null {
         meta: {
           title: data.title,
           slug: data.slug,
-          date: data.date,
+          order: data.order ?? 999,
           excerpt: data.excerpt,
           heroImage: data.heroImage,
           tags: data.tags ?? [],
