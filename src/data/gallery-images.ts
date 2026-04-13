@@ -10,6 +10,7 @@ export interface GalleryImage {
   altText: string;
   catalogId?: string;
   constellation?: string;
+  sortOrder?: number;
 }
 
 export const galleryImages: GalleryImage[] = imagesData.map((img) => ({
@@ -20,10 +21,17 @@ export const galleryImages: GalleryImage[] = imagesData.map((img) => ({
   altText: img.altText,
   catalogId: img.catalogId ?? undefined,
   constellation: img.constellation ?? undefined,
+  sortOrder: img.sortOrder ?? undefined,
 }));
 
 export function getImagesByCategory(category: GalleryCategory): GalleryImage[] {
-  return galleryImages.filter((img) => img.category === category);
+  return galleryImages
+    .filter((img) => img.category === category)
+    .sort((a, b) => {
+      const aOrder = a.sortOrder ?? Infinity;
+      const bOrder = b.sortOrder ?? Infinity;
+      return aOrder - bOrder;
+    });
 }
 
 export function filterByQuery(images: GalleryImage[], query: string): GalleryImage[] {
