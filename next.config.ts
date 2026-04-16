@@ -5,6 +5,14 @@ const nextConfig: NextConfig = {
     loader: "custom",
     loaderFile: "./src/lib/cloudinary.ts",
   },
+  turbopack: {
+    rules: {
+      "*.yaml": {
+        loaders: ["yaml-loader"],
+        as: "*.js",
+      },
+    },
+  },
 };
 
 export default nextConfig;

@@ -6,6 +6,8 @@ import type { GalleryImage } from "@/data/gallery-images";
 import GalleryGrid from "./GalleryGrid";
 import ImageDetailOverlay from "./ImageDetailOverlay";
 
+type CategoryTab = "dso" | "solar-system";
+
 export default function GalleryContent({
   dsoImages,
   solarImages,
@@ -15,6 +17,9 @@ export default function GalleryContent({
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [activeTab, setActiveTab] = useState<CategoryTab>(
+    (searchParams.get("tab") as CategoryTab) || "dso"
+  );
   const [selectedId, setSelectedId] = useState<string | null>(
     searchParams.get("image")
   );
@@ -22,6 +27,8 @@ export default function GalleryContent({
   // Sync with URL on mount and when searchParams change
   useEffect(() => {
     setSelectedId(searchParams.get("image"));
+    const tab = searchParams.get("tab") as CategoryTab;
+    if (tab === "dso" || tab === "solar-system") setActiveTab(tab);
   }, [searchParams]);
 
   const allImages = [...dsoImages, ...solarImages];
@@ -29,12 +36,18 @@ export default function GalleryContent({
     ? allImages.find((img) => img.id === selectedId) ?? null
     : null;
 
-  // Determine which category list the selected image belongs to for navigation
-  const categoryImages = selectedImage
-    ? selectedImage.category === "dso"
-      ? dsoImages
-      : solarImages
-    : [];
+  const activeImages = activeTab === "dso" ? dsoImages : solarImages;
+
+  const switchTab = useCallback(
+    (tab: CategoryTab) => {
+      setActiveTab(tab);
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("tab", tab);
+      params.delete("image");
+      router.replace(`?${params.toString()}`, { scroll: false });
+    },
+    [router, searchParams]
+  );
 
   const openImage = useCallback(
     (id: string) => {
@@ -56,32 +69,39 @@ export default function GalleryContent({
 
   return (
     <>
-      {dsoImages.length > 0 && (
-        <section className="mt-6">
-          <h2 className="text-lg font-medium text-muted mb-4">Deep Sky Objects</h2>
-          <GalleryGrid images={dsoImages} onImageClick={openImage} />
-        </section>
-      )}
+      <div className="flex gap-3 mt-4 mb-6">
+        <button
+          onClick={() => switchTab("dso")}
+          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+            activeTab === "dso"
+              ? "bg-white text-black"
+              : "bg-white/10 text-muted hover:bg-white/20"
+          }`}
+        >
+          Deep Sky
+        </button>
+        <button
+          onClick={() => switchTab("solar-system")}
+          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+            activeTab === "solar-system"
+              ? "bg-white text-black"
+              : "bg-white/10 text-muted hover:bg-white/20"
+          }`}
+        >
+          Solar System
+        </button>
+      </div>
 
-      {dsoImages.length > 0 && solarImages.length > 0 && (
-        <hr className="my-8 border-white/10" />
-      )}
-
-      {solarImages.length > 0 && (
-        <section>
-          <h2 className="text-lg font-medium text-muted mb-4">Solar System</h2>
-          <GalleryGrid images={solarImages} onImageClick={openImage} />
-        </section>
-      )}
-
-      {dsoImages.length === 0 && solarImages.length === 0 && (
+      {activeImages.length > 0 ? (
+        <GalleryGrid images={activeImages} onImageClick={openImage} />
+      ) : (
         <p className="text-muted text-center py-12">No images found.</p>
       )}
 
       {selectedImage && (
         <ImageDetailOverlay
           image={selectedImage}
-          images={categoryImages}
+          images={activeImages}
           onClose={closeImage}
           onNavigate={openImage}
         />

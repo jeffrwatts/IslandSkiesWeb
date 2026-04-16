@@ -1,4 +1,5 @@
 import imagesData from "./images.json";
+import descriptions from "./descriptions.yaml";
 
 export interface ImageMetadata {
   id: string;
@@ -21,6 +22,7 @@ export const imageMetadata: ImageMetadata[] = imagesData.map((img) => ({
   constellation: img.constellation ?? undefined,
   objectType: img.objectType ?? undefined,
   objectSubType: img.objectSubType ?? undefined,
+  description: descriptions[img.id] ?? undefined,
 }));
 
 export function getMetadataById(id: string): ImageMetadata | undefined {
