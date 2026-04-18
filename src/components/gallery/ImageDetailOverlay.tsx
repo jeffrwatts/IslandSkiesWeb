@@ -6,7 +6,7 @@ import type { GalleryImage } from "@/data/gallery-images";
 import { getMetadataById } from "@/data/image-metadata";
 import ImageMetadataPanel from "./ImageMetadataPanel";
 import ImageZoomView from "./ImageZoomView";
-import { getCloudinaryUrl } from "@/lib/cloudinary";
+import { getCloudinaryUrl, getChartFullUrl } from "@/lib/cloudinary";
 
 export default function ImageDetailOverlay({
   image,
@@ -20,6 +20,7 @@ export default function ImageDetailOverlay({
   onNavigate: (id: string) => void;
 }) {
   const [zoomOpen, setZoomOpen] = useState(false);
+  const [chartZoomOpen, setChartZoomOpen] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const metadata = getMetadataById(image.id);
 
@@ -42,14 +43,14 @@ export default function ImageDetailOverlay({
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
-      if (zoomOpen) return;
+      if (zoomOpen || chartZoomOpen) return;
       if (e.key === "Escape") onClose();
       if (e.key === "ArrowLeft") goToPrev();
       if (e.key === "ArrowRight") goToNext();
     }
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [zoomOpen, onClose, goToPrev, goToNext]);
+  }, [zoomOpen, chartZoomOpen, onClose, goToPrev, goToNext]);
 
   // Prevent body scroll when overlay is open
   useEffect(() => {
@@ -58,6 +59,16 @@ export default function ImageDetailOverlay({
       document.body.style.overflow = "";
     };
   }, []);
+
+  if (chartZoomOpen && metadata?.contextChart) {
+    return (
+      <ImageZoomView
+        src={getChartFullUrl(metadata.contextChart)}
+        alt={`Sky location of ${metadata.objectName}`}
+        onClose={() => setChartZoomOpen(false)}
+      />
+    );
+  }
 
   if (zoomOpen) {
     return (
@@ -155,7 +166,10 @@ export default function ImageDetailOverlay({
         {/* Metadata panel */}
         <div className="flex-1 bg-card overflow-y-auto p-6 landscape:border-l border-white/10">
           {metadata ? (
-            <ImageMetadataPanel metadata={metadata} />
+            <ImageMetadataPanel
+              metadata={metadata}
+              onChartClick={() => setChartZoomOpen(true)}
+            />
           ) : (
             <p className="text-muted">No metadata available.</p>
           )}

@@ -19,3 +19,11 @@ export default function cloudinaryLoader({
 export function getCloudinaryUrl(cloudinaryId: string) {
   return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/f_auto/${cloudinaryId}`;
 }
+
+export function getChartThumbnailUrl(cloudinaryId: string, width: number) {
+  return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/w_${width},q_auto,f_png/${cloudinaryId}.png`;
+}
+
+export function getChartFullUrl(cloudinaryId: string) {
+  return `https://res.cloudinary.com/${CLOUD_NAME}/image/upload/f_png/${cloudinaryId}.png`;
+}

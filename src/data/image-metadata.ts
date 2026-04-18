@@ -11,6 +11,7 @@ export interface ImageMetadata {
   objectType?: string;
   objectSubType?: string;
   description?: string;
+  contextChart?: string;
 }
 
 export const imageMetadata: ImageMetadata[] = imagesData.map((img) => ({
@@ -23,6 +24,7 @@ export const imageMetadata: ImageMetadata[] = imagesData.map((img) => ({
   objectType: img.objectType ?? undefined,
   objectSubType: img.objectSubType ?? undefined,
   description: descriptions[img.id] ?? undefined,
+  contextChart: img.contextChart ?? undefined,
 }));
 
 export function getMetadataById(id: string): ImageMetadata | undefined {
