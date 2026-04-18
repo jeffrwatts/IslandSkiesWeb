@@ -1,196 +1,334 @@
 # Image descriptions for the gallery detail view.
 # Each key is an image ID from images.json.
-# Edit freely — this file is not auto-generated.
+# Edit freely; this file is not auto-generated.
 
 # ── Deep Sky Objects ──
 
 ic1805: >
-  The Heart Nebula is a vast emission nebula spanning roughly 200 light-years
-  across in Cassiopeia. Its glow is powered by a cluster of hot, young O-type
-  stars at its center, which ionize the surrounding hydrogen gas.
+  The Heart Nebula is a vast cloud of glowing gas spanning roughly 200
+  light-years across in Cassiopeia, about 7,500 light-years from Earth. A
+  cluster of extremely hot, young stars at its center provides the energy
+  that makes the surrounding hydrogen gas shine. Their powerful winds also
+  sculpt the nebula's interior into dramatic pillars and ridges. The Heart
+  Nebula sits alongside the neighboring Soul Nebula, forming one of the
+  most active stellar nurseries in our region of the galaxy.
 
 ic1805-ic1805-inner: >
-  The inner core of the Heart Nebula reveals the young open cluster
-  Melotte 15, whose massive stars sculpt the surrounding gas into dramatic
-  pillars and ridges through intense stellar winds.
+  The inner core of the Heart Nebula reveals the young star cluster
+  Melotte 15, whose massive stars carve the surrounding gas into dramatic
+  pillars and ridges. These columns of dense gas resist erosion and shield
+  the material behind them, much like the famous Pillars of Creation in
+  the Eagle Nebula. New stars are likely still forming within these
+  sheltered pockets of gas and dust.
 
 ic410-tadpoles: >
-  IC 410 is an emission nebula surrounding the open star cluster NGC 1893.
-  Its most striking features are two tadpole-shaped streams of gas and dust,
-  each roughly 10 light-years long, sculpted by stellar winds from the cluster.
+  IC 410 is a glowing cloud of gas surrounding a young star cluster in
+  Auriga, roughly 12,000 light-years from Earth. Its most striking features
+  are two tadpole-shaped streams of gas and dust, each about 10 light-years
+  long. The dense "heads" of the tadpoles resist being blown away by stellar
+  winds, while their "tails" trail outward like wind socks. New stars may
+  be forming inside these dense heads even as the surrounding gas is
+  stripped away.
 
 ic434: >
-  The Horsehead Nebula is a dark nebula silhouetted against the bright emission
-  region IC 434 in Orion. Its distinctive shape is formed by dense, cold dust
-  absorbing light from the glowing hydrogen gas behind it.
+  The Horsehead Nebula is one of the most recognizable shapes in the night
+  sky, a dark cloud of dust silhouetted against a curtain of glowing
+  hydrogen gas in Orion. It sits about 1,375 light-years from Earth within
+  the vast Orion Molecular Cloud Complex, one of the nearest large
+  star-forming regions. Over the next few million years, intense radiation
+  from a nearby star will likely erode the Horsehead away entirely.
 
 ic443: >
-  The Jellyfish Nebula is a supernova remnant in Gemini, the expanding shell
-  of gas from a star that exploded roughly 30,000 years ago. Its filamentary
-  structure traces the shock wave still propagating through the interstellar medium.
+  The Jellyfish Nebula is the expanding debris from a star that exploded
+  roughly 30,000 years ago in Gemini. The wispy filaments trace the shock
+  wave still racing outward through surrounding space. A neutron star, the
+  ultra-dense collapsed core of the original star, has been detected near
+  the nebula's edge. The remnant spans about 70 light-years across and lies
+  roughly 5,000 light-years from Earth.
 
 ic5146: >
-  The Cocoon Nebula is a reflection and emission nebula in Cygnus, embedded
-  at the tip of a long, dark molecular cloud known as Barnard 168. A young
-  star at its center illuminates the surrounding gas and dust.
+  The Cocoon Nebula is a compact star-forming region in Cygnus, nestled at
+  the tip of a long dark lane of dust known as Barnard 168. A single young
+  star at its center lights up the surrounding gas and dust, creating both
+  glowing emission and reflected starlight. The nebula lies roughly 4,000
+  light-years away, and its central star is estimated to be only a few
+  hundred thousand years old, making it a newborn by cosmic standards.
 
 m101: >
-  The Pinwheel Galaxy is a grand-design spiral galaxy roughly 21 million
-  light-years away in Ursa Major. Its pronounced spiral arms are rich with
-  star-forming regions and span nearly 170,000 light-years across.
+  The Pinwheel Galaxy is a grand spiral galaxy roughly 21 million
+  light-years away in Ursa Major. Its sweeping arms span nearly 170,000
+  light-years, almost twice the diameter of our own Milky Way, and are
+  dotted with bright regions where new stars are being born. The galaxy's
+  lopsided shape is thought to result from gravitational tugging by
+  neighboring galaxies over hundreds of millions of years.
 
 m13: >
-  The Hercules Cluster is one of the brightest globular clusters visible from
-  the northern hemisphere, containing roughly 300,000 stars packed into a sphere
-  about 145 light-years in diameter. It lies 22,000 light-years from Earth.
+  The Hercules Cluster is one of the brightest globular clusters visible
+  from the northern hemisphere, a dense ball of roughly 300,000 stars
+  spanning about 145 light-years across. It lies 22,000 light-years from
+  Earth and orbits the center of the Milky Way. At an estimated 11.6
+  billion years old, its stars are among the most ancient in our galaxy.
+  Near its core, stars are packed so closely together that they are
+  separated by only fractions of a light-year.
 
 m16-pillars-of-creation: >
   The Pillars of Creation are towering columns of gas and dust within the
-  Eagle Nebula, made famous by the Hubble Space Telescope. These structures,
-  roughly 4-5 light-years tall, are active sites of new star formation.
+  Eagle Nebula, made famous by the Hubble Space Telescope in 1995. Standing
+  roughly 4-5 light-years tall, they are active nurseries where new stars
+  are forming inside dense pockets of collapsing gas. Radiation from nearby
+  hot stars is slowly eroding the pillars away. Infrared images have
+  revealed newborn stars still embedded within the columns, hidden from
+  view in visible light.
 
 m16: >
-  The Eagle Nebula is a young open cluster surrounded by a vast emission
-  nebula in Serpens, roughly 7,000 light-years from Earth. Its interior hosts
-  the iconic Pillars of Creation and numerous newly forming stars.
+  The Eagle Nebula is a glowing cloud of gas in Serpens, roughly 7,000
+  light-years from Earth, surrounding a young star cluster only 1-2 million
+  years old. Its interior hosts the iconic Pillars of Creation along with
+  numerous other columns of dense gas where new stars are forming. The
+  cluster's most massive stars are already reshaping the nebula with their
+  radiation and winds, carving cavities and triggering fresh waves of star
+  formation at the edges.
 
 m20: >
-  The Trifid Nebula is a rare combination of emission, reflection, and dark
-  nebulae in Sagittarius. Its name refers to the three dark dust lanes that
-  appear to divide the glowing core into distinct lobes.
+  The Trifid Nebula is an unusual combination of three types of nebula in
+  one: glowing emission, scattered reflection, and dark dust, all visible
+  in Sagittarius about 5,200 light-years away. Its name comes from the
+  three dark dust lanes that divide the rosy core into distinct lobes. A
+  separate blue region nearby is starlight reflecting off dust. At only
+  about 300,000 years old, the Trifid is one of the youngest star-forming
+  regions known.
 
 m27: >
-  The Dumbbell Nebula is a planetary nebula in Vulpecula, formed when a
-  dying sun-like star shed its outer layers roughly 10,000 years ago. The
-  remaining white dwarf at its center illuminates the expanding gas shell.
+  The Dumbbell Nebula is the cast-off outer layers of a dying sun-like
+  star in Vulpecula, shed roughly 10,000 years ago. The hot, dense remnant
+  at its center, now a white dwarf, bathes the expanding gas in
+  ultraviolet light, causing it to glow. Discovered by Charles Messier in
+  1764, it was the first planetary nebula ever identified. The shell is
+  expanding at about 30 kilometers per second and currently spans roughly
+  2.5 light-years across.
 
 m3: >
-  M3 is a globular cluster in Canes Venatici containing roughly half a
-  million stars. At an estimated 8 billion years old, it is one of the
-  largest and brightest globular clusters in the Milky Way.
+  M3 is a globular cluster in Canes Venatici, a dense sphere of roughly
+  half a million stars about 33,900 light-years from Earth. At an estimated
+  8 billion years old, it is one of the largest and brightest globular
+  clusters orbiting the Milky Way. M3 is especially notable for containing
+  over 270 variable stars, more than any other known globular cluster.
+  These stars pulse in brightness on regular cycles and serve as cosmic
+  yardsticks for measuring distance.
 
 m31: >
   The Andromeda Galaxy is the nearest large spiral galaxy to the Milky Way,
-  roughly 2.5 million light-years away. Containing about a trillion stars,
-  it is on a collision course with our galaxy, expected to merge in about
-  4.5 billion years.
+  roughly 2.5 million light-years away and home to about a trillion stars.
+  It is approaching us at about 110 kilometers per second, and the two
+  galaxies are expected to merge in about 4.5 billion years. Andromeda
+  played a pivotal role in astronomy when Edwin Hubble's observations of
+  its stars in the 1920s proved for the first time that galaxies exist
+  beyond our own.
 
 m42: >
-  The Orion Nebula is one of the brightest diffuse nebulae in the sky and
-  the closest major star-forming region to Earth at roughly 1,350 light-years.
-  At its heart lies the Trapezium, a tight cluster of young, massive stars.
+  The Orion Nebula is one of the brightest nebulae in the sky and the
+  closest major star-forming region to Earth at roughly 1,350 light-years.
+  At its heart lies the Trapezium, a tight group of four massive young
+  stars whose intense radiation lights up the entire cloud. The nebula is
+  part of the much larger Orion Molecular Cloud, which contains enough gas
+  to form tens of thousands of new stars. Infrared observations have
+  revealed hundreds of dusty disks around newborn stars here, potential
+  solar systems in the making.
 
 m42-2: >
-  The Orion Nebula is one of the brightest diffuse nebulae in the sky and
-  the closest major star-forming region to Earth at roughly 1,350 light-years.
-  At its heart lies the Trapezium, a tight cluster of young, massive stars.
+  The Orion Nebula is one of the brightest nebulae in the sky and the
+  closest major star-forming region to Earth at roughly 1,350 light-years.
+  At its heart lies the Trapezium, a tight group of four massive young
+  stars whose intense radiation lights up the entire cloud. The nebula is
+  part of the much larger Orion Molecular Cloud, which contains enough gas
+  to form tens of thousands of new stars. Infrared observations have
+  revealed hundreds of dusty disks around newborn stars here, potential
+  solar systems in the making.
 
 m45: >
-  The Pleiades is a young open star cluster in Taurus, easily visible to the
-  naked eye. Its hot blue stars are surrounded by faint reflection nebulosity —
-  interstellar dust that scatters their light.
+  The Pleiades is a young star cluster in Taurus, easily visible to the
+  naked eye as a compact group of blue-white stars. While only six or seven
+  are typically seen without a telescope, the cluster actually contains over
+  a thousand members. A delicate haze of reflected starlight surrounds the
+  brightest stars where they are passing through a cloud of interstellar
+  dust. At about 100 million years old and 444 light-years away, the
+  Pleiades has been recognized by cultures around the world throughout
+  recorded history.
 
 m51: >
-  The Whirlpool Galaxy is an interacting grand-design spiral galaxy roughly
-  23 million light-years away in Canes Venatici. Its companion, NGC 5195,
-  is connected by a tidal bridge of gas and dust from their gravitational encounter.
+  The Whirlpool Galaxy is an interacting spiral galaxy roughly 23 million
+  light-years away in Canes Venatici. Its smaller companion, NGC 5195, is
+  tugging on it gravitationally, an encounter that has enhanced the
+  Whirlpool's striking spiral arms and triggered bursts of new star
+  formation. It was the first galaxy whose spiral structure was recognized,
+  identified by Lord Rosse in 1845 through what was then the world's
+  largest telescope.
 
 m8: >
-  The Lagoon Nebula is a giant emission nebula in Sagittarius, one of only
-  two star-forming regions visible to the naked eye from mid-northern latitudes.
-  It spans roughly 110 by 50 light-years and lies about 4,100 light-years away.
+  The Lagoon Nebula is one of the largest and brightest nebulae in
+  Sagittarius, and one of only two star-forming regions visible to the
+  naked eye from mid-northern latitudes. It spans roughly 110 by 50
+  light-years and lies about 4,100 light-years away. At its center, a
+  powerful young star is carving a bright cavity in the gas known as the
+  Hourglass. Scattered throughout are small, dark, dense clouds called Bok
+  globules that may be on the verge of collapsing to form new stars.
 
 m83: >
   The Southern Pinwheel Galaxy is a barred spiral galaxy roughly 15 million
-  light-years away in Hydra. It is one of the most prolific producers of
-  supernovae in the nearby universe, with six observed since 1923.
+  light-years away in Hydra. It holds the record for the most observed
+  supernovae of any galaxy, with six since 1923, a sign of its vigorous
+  star formation. Its bright central bar funnels gas inward, fueling intense
+  activity in the core. The galaxy may have swallowed a smaller galaxy in
+  the past, based on hints of a double structure at its center.
 
 ngc1499: >
-  The California Nebula is a large emission nebula in Perseus, named for
-  its resemblance to the outline of the U.S. state. It is ionized primarily
-  by the nearby hot blue star Xi Persei.
+  The California Nebula is a large cloud of glowing gas in Perseus, named
+  for its resemblance to the outline of the U.S. state. A single hot blue
+  star, Xi Persei, provides the energy that makes it shine. Despite its
+  enormous apparent size, stretching nearly 2.5 degrees across the sky,
+  the nebula is so faintly spread that it is very difficult to see by eye.
+  It lies roughly 1,000 light-years from Earth and spans about 100
+  light-years across.
 
 ngc1977: >
   The Running Man Nebula is a reflection nebula near the Orion Nebula,
-  illuminated by a small group of young stars. Its distinctive shape
-  suggests a figure in motion when viewed in long-exposure photographs.
+  where blue starlight bounces off surrounding dust to create a ghostly
+  glow. Dark dust lanes weave through the light to outline a shape
+  suggesting a figure in motion. The nebula is part of the same vast Orion
+  cloud complex that includes the Orion Nebula and the Horsehead Nebula,
+  about 1,500 light-years from Earth.
 
 ngc2237: >
-  The Rosette Nebula is a large spherical emission nebula in Monoceros,
-  roughly 130 light-years in diameter. At its center lies the open cluster
-  NGC 2244, whose stellar winds have carved out the nebula's hollow core.
+  The Rosette Nebula is a large, roughly circular cloud of glowing gas in
+  Monoceros, about 130 light-years across and 5,000 light-years from Earth.
+  A cluster of young stars at its center has blown out a hollow cavity with
+  their powerful winds and radiation. Along the cavity's inner rim, dense
+  pillars and knots of gas are being compressed, and these may be regions
+  where the next generation of stars is already forming.
 
 ngc2264: >
-  The Cone Nebula is a dark absorption nebula in Monoceros, part of a larger
-  star-forming complex that includes the Christmas Tree Cluster. The conical
-  pillar is sculpted by radiation from nearby massive stars.
+  The Cone Nebula is a dark, cone-shaped pillar of dust in Monoceros, part
+  of a larger star-forming region that includes the Christmas Tree Cluster.
+  Radiation from nearby massive stars erodes the surrounding gas, but the
+  dense tip of the cone resists, creating its distinctive pointed shape.
+  The complex lies roughly 2,500 light-years from Earth and is rich with
+  narrow jets of gas shot out by newborn stars as they pull in material
+  from their surroundings.
 
 ngc2359: >
-  Thor's Helmet is an emission nebula in Canis Major shaped by the powerful
-  stellar winds of a Wolf-Rayet star at its center. These extremely hot,
-  massive stars are in a brief, violent phase before ending as supernovae.
+  Thor's Helmet is a bubble-shaped nebula in Canis Major, blown by the
+  fierce winds of a Wolf-Rayet star, one of the hottest, most massive,
+  and shortest-lived types of star known. The central star has a surface
+  temperature exceeding 100,000 degrees and is shedding mass at a
+  tremendous rate. The helmet-shaped shell spans roughly 30 light-years
+  across and lies about 15,000 light-years from Earth. The star will
+  eventually end its life in a supernova explosion.
 
 ngc2467: >
   The Skull and Crossbones Nebula is a star-forming region in Puppis
-  containing several young open clusters. Its complex structure of glowing
-  gas and dark dust lanes spans roughly 50 light-years.
+  containing several young star clusters at varying distances along the
+  same line of sight. Its complex mix of glowing gas and dark dust lanes
+  spans roughly 50 light-years. The region contains stars at very different
+  stages of life, from dense clouds still collapsing to form new stars to
+  massive young stars already lighting up their surroundings.
 
 ngc281: >
-  The Pacman Nebula is an emission nebula in Cassiopeia containing the open
-  cluster IC 1590. Dense Bok globules — small, dark clouds of gas and dust —
-  are visible within the nebula as sites of potential future star formation.
+  The Pacman Nebula is a glowing cloud of gas in Cassiopeia, roughly 9,200
+  light-years from Earth, surrounding a very young star cluster only about
+  3.5 million years old. Dark clouds of dense gas and dust called Bok
+  globules dot the nebula's interior and may one day collapse to form new
+  stars. The nebula's distinctive shape, reminiscent of the video game
+  character, comes from dark dust lanes that divide the glowing gas and
+  give the appearance of an open mouth.
 
 ngc6888: >
-  The Crescent Nebula is an emission nebula in Cygnus formed by the fast
-  stellar wind of the Wolf-Rayet star WR 136 colliding with slower material
-  it ejected as a red supergiant roughly 250,000 years earlier.
+  The Crescent Nebula is a glowing shell of gas in Cygnus, created when
+  the fast wind of a massive Wolf-Rayet star slammed into slower material
+  it had shed earlier in its life. The collision compresses the gas into
+  the bright crescent shape visible today. The star at its center is in
+  the final stages of its life and is expected to explode as a supernova
+  within the next few hundred thousand years. The nebula spans roughly 25
+  light-years and lies about 5,000 light-years from Earth.
 
 ngc6960: >
-  The Western Veil Nebula is part of the Cygnus Loop, a large supernova
-  remnant roughly 2,400 light-years away. The delicate filaments trace
-  the shock front where the expanding blast wave meets the interstellar medium.
+  The Western Veil Nebula is part of the Cygnus Loop, the remains of a
+  star that exploded between 10,000 and 20,000 years ago. The delicate
+  filaments trace the shock front where the blast wave is still plowing
+  into surrounding gas, heating it until it glows. The entire remnant has
+  expanded to span about 120 light-years across, roughly 2,400 light-years
+  from Earth. The bright star 52 Cygni appears draped in the nebula but is
+  actually a foreground star unrelated to the explosion.
 
 ngc6979: >
-  Pickering's Triangle is a faint, filamentary section of the Cygnus Loop
-  supernova remnant, located between the Eastern and Western Veil. It was
-  discovered photographically by Williamina Fleming in 1904.
+  Pickering's Triangle is a faint, wispy section of the Cygnus Loop
+  supernova remnant, located between the brighter Eastern and Western Veil.
+  It was discovered photographically in 1904 by Williamina Fleming at the
+  Harvard College Observatory, though it was originally credited to her
+  supervisor Edward Pickering. The delicate threads of glowing gas mark
+  where the ancient supernova's shock wave is encountering patches of
+  interstellar material.
 
 ngc6992: >
   The Eastern Veil Nebula is the brightest section of the Cygnus Loop
-  supernova remnant. Its intricate lacework of glowing filaments is produced
-  by the collision of the expanding shock wave with surrounding interstellar gas.
+  supernova remnant, displaying an intricate lacework of glowing filaments.
+  These filaments form where the expanding shock wave from the ancient
+  explosion compresses and heats the surrounding gas until it shines. The
+  original star was likely about 20 times the mass of our Sun, and the
+  energy released in its explosion is still reshaping the surrounding space
+  thousands of years later.
 
 ngc7000-cygnus-wall: >
-  The Cygnus Wall is the most active star-forming region within the North
-  America Nebula, corresponding to the "Mexico and Central America" portion
-  of its outline. Dense columns of gas and dust are being eroded by intense
-  ultraviolet radiation from nearby young stars.
+  The Cygnus Wall is the most active star-forming region within the larger
+  North America Nebula, corresponding to the "Mexico" portion of its
+  outline. Dense columns of gas and dust here are being eaten away by
+  intense radiation from nearby young stars, creating a dramatic boundary
+  between bright and dark regions. The complex lies roughly 2,600
+  light-years from Earth, and the powerful star responsible for illuminating
+  the entire nebula was only recently identified, hidden behind a thick
+  curtain of dust.
 
 ngc7293: >
   The Helix Nebula is one of the closest planetary nebulae to Earth at
-  roughly 650 light-years. Its expanding rings of gas, shed by a dying
-  sun-like star, give it a striking eye-like appearance when viewed face-on.
+  roughly 650 light-years, making it one of the largest in apparent size
+  on the sky. Its expanding rings of gas, shed by a dying sun-like star,
+  give it a striking eye-like appearance. The central white dwarf has a
+  surface temperature of about 120,000 degrees and lights up the
+  surrounding shell. Thousands of comet-like knots have been observed
+  within the nebula, each with a dense head and a tail pointing away from
+  the central star.
 
 ngc7380: >
-  The Wizard Nebula is an emission nebula in Cepheus surrounding the young
-  open cluster NGC 7380. Stellar winds from the cluster's hot stars are
-  actively shaping the surrounding gas into pillars and cavities.
+  The Wizard Nebula is a glowing cloud of gas in Cepheus surrounding a
+  young star cluster roughly 7,000 light-years from Earth. Winds from the
+  cluster's hottest stars are carving the surrounding gas into pillars and
+  cavities, creating the complex shape that suggests a wizard's profile.
+  The cluster is only about 4 million years old, and new stars are still
+  forming in the compressed gas at the edges of the expanding cavities.
 
 ngc7635-hoo: >
-  The Bubble Nebula is an emission nebula in Cassiopeia created by the
-  stellar wind of the massive star BD+60 2522. The roughly 10 light-year
-  diameter bubble is shaped by the interaction of this wind with a nearby
-  molecular cloud.
+  The Bubble Nebula is a nearly perfect sphere of gas in Cassiopeia, blown
+  by the powerful wind of a star roughly 40 times the mass of our Sun. The
+  bubble spans about 10 light-years across but is not perfectly centered
+  on its star because the surrounding gas is denser on one side, pushing
+  the bubble off-center. The nebula lies roughly 11,000 light-years from
+  Earth, and the massive star at its heart will eventually end its life in
+  a supernova explosion.
 
 barnard68: >
-  Barnard 68 is a small, isolated dark nebula in Ophiuchus — a dense
-  molecular cloud so opaque that it blocks virtually all light from the
-  stars behind it. It is a potential site of future low-mass star formation.
+  Barnard 68 is a small, dense cloud of dust and gas in Ophiuchus, so
+  opaque that it blocks virtually all light from the stars behind it. At
+  only about half a light-year across and 500 light-years away, it is one
+  of the nearest and best-studied clouds of its kind. Its mass is roughly
+  twice that of our Sun, and it may be on the verge of collapsing under its
+  own gravity to form a new star within the next 200,000 years.
 
 barnard72: >
-  The Snake Nebula is a dark nebula in Ophiuchus, visible as an S-shaped
-  lane of obscuring dust against the dense star fields of the Milky Way's
-  central bulge. It is part of the larger Dark Horse complex.
+  The Snake Nebula is a winding S-shaped lane of dark dust in Ophiuchus,
+  visible in silhouette against the dense star fields toward the center of
+  the Milky Way. It is part of a much larger complex of dark clouds called
+  the Dark Horse. The nebula is composed of extremely cold gas and dust,
+  only about 10-20 degrees above absolute zero, the kind of frigid
+  material from which new stars can eventually form.
 
 # ── Solar System ──
 
@@ -242,13 +380,13 @@ venus: >
 moon-eclipse: >
   A lunar eclipse occurs when Earth passes between the Sun and Moon,
   casting its shadow across the lunar surface. The reddish hue comes from
-  sunlight refracted through Earth's atmosphere — the combined light of
+  sunlight refracted through Earth's atmosphere, the combined light of
   every sunrise and sunset on the planet.
 
 moon-full: >
   The full Moon reveals the contrast between bright, heavily cratered
-  highlands and dark, smooth maria — ancient basaltic lava plains formed
-  by volcanic eruptions billions of years ago.
+  highlands and dark, smooth maria. These are ancient basaltic lava plains
+  formed by volcanic eruptions billions of years ago.
 
 moon-plato: >
   The crater Plato is a large, flat-floored impact crater on the northern
