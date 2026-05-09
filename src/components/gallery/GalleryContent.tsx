@@ -6,37 +6,47 @@ import type { GalleryImage } from "@/data/gallery-images";
 import GalleryGrid from "./GalleryGrid";
 import ImageDetailOverlay from "./ImageDetailOverlay";
 
-type CategoryTab = "dso" | "solar-system";
+type CategoryTab = "nebulae" | "galaxies-clusters" | "solar-system";
+
+const VALID_TABS: CategoryTab[] = ["nebulae", "galaxies-clusters", "solar-system"];
 
 export default function GalleryContent({
-  dsoImages,
+  nebulaeImages,
+  galaxiesImages,
   solarImages,
 }: {
-  dsoImages: GalleryImage[];
+  nebulaeImages: GalleryImage[];
+  galaxiesImages: GalleryImage[];
   solarImages: GalleryImage[];
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState<CategoryTab>(
-    (searchParams.get("tab") as CategoryTab) || "dso"
+    (VALID_TABS.includes(searchParams.get("tab") as CategoryTab)
+      ? searchParams.get("tab")
+      : "nebulae") as CategoryTab
   );
   const [selectedId, setSelectedId] = useState<string | null>(
     searchParams.get("image")
   );
 
-  // Sync with URL on mount and when searchParams change
   useEffect(() => {
     setSelectedId(searchParams.get("image"));
     const tab = searchParams.get("tab") as CategoryTab;
-    if (tab === "dso" || tab === "solar-system") setActiveTab(tab);
+    if (VALID_TABS.includes(tab)) setActiveTab(tab);
   }, [searchParams]);
 
-  const allImages = [...dsoImages, ...solarImages];
+  const imagesByTab: Record<CategoryTab, GalleryImage[]> = {
+    nebulae: nebulaeImages,
+    "galaxies-clusters": galaxiesImages,
+    "solar-system": solarImages,
+  };
+
+  const allImages = [...nebulaeImages, ...galaxiesImages, ...solarImages];
+  const activeImages = imagesByTab[activeTab];
   const selectedImage = selectedId
     ? allImages.find((img) => img.id === selectedId) ?? null
     : null;
-
-  const activeImages = activeTab === "dso" ? dsoImages : solarImages;
 
   const switchTab = useCallback(
     (tab: CategoryTab) => {
@@ -67,29 +77,28 @@ export default function GalleryContent({
     router.replace(qs ? `?${qs}` : "/", { scroll: false });
   }, [router, searchParams]);
 
+  const tabs: { id: CategoryTab; label: string }[] = [
+    { id: "nebulae", label: "Nebulae" },
+    { id: "galaxies-clusters", label: "Galaxies & Clusters" },
+    { id: "solar-system", label: "Solar System" },
+  ];
+
   return (
     <>
       <div className="flex gap-3 mt-4 mb-6">
-        <button
-          onClick={() => switchTab("dso")}
-          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-            activeTab === "dso"
-              ? "bg-white text-black"
-              : "bg-white/10 text-muted hover:bg-white/20"
-          }`}
-        >
-          Deep Sky
-        </button>
-        <button
-          onClick={() => switchTab("solar-system")}
-          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-            activeTab === "solar-system"
-              ? "bg-white text-black"
-              : "bg-white/10 text-muted hover:bg-white/20"
-          }`}
-        >
-          Solar System
-        </button>
+        {tabs.map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => switchTab(tab.id)}
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+              activeTab === tab.id
+                ? "bg-white text-black"
+                : "bg-white/10 text-muted hover:bg-white/20"
+            }`}
+          >
+            {tab.label}
+          </button>
+        ))}
       </div>
 
       {activeImages.length > 0 ? (

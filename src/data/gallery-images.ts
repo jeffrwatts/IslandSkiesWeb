@@ -10,6 +10,7 @@ export interface GalleryImage {
   altText: string;
   catalogId?: string;
   constellation?: string;
+  objectType?: string;
   sortOrder?: number;
 }
 
@@ -21,17 +22,33 @@ export const galleryImages: GalleryImage[] = imagesData.map((img) => ({
   altText: img.altText,
   catalogId: img.catalogId ?? undefined,
   constellation: img.constellation ?? undefined,
+  objectType: img.objectType ?? undefined,
   sortOrder: img.sortOrder ?? undefined,
 }));
 
+function sortedDso(images: GalleryImage[]): GalleryImage[] {
+  return images.sort((a, b) => {
+    const aOrder = a.sortOrder ?? Infinity;
+    const bOrder = b.sortOrder ?? Infinity;
+    return aOrder - bOrder;
+  });
+}
+
 export function getImagesByCategory(category: GalleryCategory): GalleryImage[] {
-  return galleryImages
-    .filter((img) => img.category === category)
-    .sort((a, b) => {
-      const aOrder = a.sortOrder ?? Infinity;
-      const bOrder = b.sortOrder ?? Infinity;
-      return aOrder - bOrder;
-    });
+  const filtered = galleryImages.filter((img) => img.category === category);
+  return sortedDso(filtered);
+}
+
+export function getNebulaeImages(): GalleryImage[] {
+  return sortedDso(galleryImages.filter((img) => img.objectType === "nebula"));
+}
+
+export function getGalaxiesAndClustersImages(): GalleryImage[] {
+  return sortedDso(
+    galleryImages.filter(
+      (img) => img.objectType === "galaxy" || img.objectType === "cluster"
+    )
+  );
 }
 
 export function filterByQuery(images: GalleryImage[], query: string): GalleryImage[] {

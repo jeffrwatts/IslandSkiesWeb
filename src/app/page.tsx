@@ -1,5 +1,10 @@
 import { Suspense } from "react";
-import { getImagesByCategory, filterByQuery } from "@/data/gallery-images";
+import {
+  getNebulaeImages,
+  getGalaxiesAndClustersImages,
+  getImagesByCategory,
+  filterByQuery,
+} from "@/data/gallery-images";
 import SearchBar from "@/components/gallery/SearchBar";
 import GalleryContent from "@/components/gallery/GalleryContent";
 import type { Metadata } from "next";
@@ -15,11 +20,13 @@ export default async function Home({
 }) {
   const { q } = await searchParams;
 
-  let dsoImages = getImagesByCategory("dso");
+  let nebulaeImages = getNebulaeImages();
+  let galaxiesImages = getGalaxiesAndClustersImages();
   let solarImages = getImagesByCategory("solar-system");
 
   if (q) {
-    dsoImages = filterByQuery(dsoImages, q);
+    nebulaeImages = filterByQuery(nebulaeImages, q);
+    galaxiesImages = filterByQuery(galaxiesImages, q);
     solarImages = filterByQuery(solarImages, q);
   }
 
@@ -29,7 +36,11 @@ export default async function Home({
         <SearchBar />
       </Suspense>
       <Suspense>
-        <GalleryContent dsoImages={dsoImages} solarImages={solarImages} />
+        <GalleryContent
+          nebulaeImages={nebulaeImages}
+          galaxiesImages={galaxiesImages}
+          solarImages={solarImages}
+        />
       </Suspense>
     </div>
   );
