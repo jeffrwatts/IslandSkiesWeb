@@ -14,9 +14,7 @@ export interface ImageMetadata {
   contextChart?: string;
 }
 
-type RawImage = (typeof imagesData)[number] & { contextChart?: string };
-
-export const imageMetadata: ImageMetadata[] = (imagesData as RawImage[]).map((img) => ({
+export const imageMetadata: ImageMetadata[] = imagesData.map((img) => ({
   id: img.id,
   objectName: img.objectName,
   catalogId: img.catalogId ?? undefined,

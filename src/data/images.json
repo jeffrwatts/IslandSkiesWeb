@@ -17,7 +17,8 @@
     "filename": "ic1805.jpg",
     "width": 6240,
     "height": 4162,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": "island-skies-astro/charts/ic1805-context"
   },
   {
     "id": "ic1805-ic1805-inner",
@@ -37,7 +38,8 @@
     "filename": "ic1805-ic1805-inner.jpg",
     "width": 4144,
     "height": 2822,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": "island-skies-astro/charts/ic1805-context"
   },
   {
     "id": "ic410-tadpoles",
@@ -57,7 +59,8 @@
     "filename": "ic410-tadpoles.jpg",
     "width": 4144,
     "height": 2822,
-    "sortOrder": 6
+    "sortOrder": 6,
+    "contextChart": "island-skies-astro/charts/ic410-context"
   },
   {
     "id": "ic434",
@@ -77,7 +80,8 @@
     "filename": "ic434.jpg",
     "width": 4100,
     "height": 2775,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": "island-skies-astro/charts/ic434-context"
   },
   {
     "id": "ic443",
@@ -97,7 +101,8 @@
     "filename": "ic443.jpg",
     "width": 6238,
     "height": 4167,
-    "sortOrder": 1
+    "sortOrder": 1,
+    "contextChart": "island-skies-astro/charts/ic443-context"
   },
   {
     "id": "ic5146",
@@ -117,7 +122,8 @@
     "filename": "ic5146.jpg",
     "width": 4136,
     "height": 2811,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": "island-skies-astro/charts/ic5146-context"
   },
   {
     "id": "m101",
@@ -137,7 +143,8 @@
     "filename": "m101.jpg",
     "width": 4129,
     "height": 2811,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": "island-skies-astro/charts/m101-context"
   },
   {
     "id": "m13",
@@ -157,7 +164,8 @@
     "filename": "m13.jpg",
     "width": 4138,
     "height": 2820,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": "island-skies-astro/charts/m13-context"
   },
   {
     "id": "m16-pillars-of-creation",
@@ -177,7 +185,8 @@
     "filename": "m16-pillars-of-creation.jpg",
     "width": 4144,
     "height": 2822,
-    "sortOrder": 15
+    "sortOrder": 15,
+    "contextChart": "island-skies-astro/charts/m16-context"
   },
   {
     "id": "m16",
@@ -197,7 +206,8 @@
     "filename": "m16.jpg",
     "width": 4134,
     "height": 2815,
-    "sortOrder": 14
+    "sortOrder": 14,
+    "contextChart": "island-skies-astro/charts/m16-context"
   },
   {
     "id": "m20",
@@ -217,7 +227,8 @@
     "filename": "m20.jpg",
     "width": 4118,
     "height": 2791,
-    "sortOrder": 12
+    "sortOrder": 12,
+    "contextChart": "island-skies-astro/charts/m20-context"
   },
   {
     "id": "m27",
@@ -237,7 +248,8 @@
     "filename": "m27.jpg",
     "width": 4126,
     "height": 2814,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": "island-skies-astro/charts/m27-context"
   },
   {
     "id": "m3",
@@ -257,7 +269,8 @@
     "filename": "m3.jpg",
     "width": 4134,
     "height": 2818,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": "island-skies-astro/charts/m3-context"
   },
   {
     "id": "m31",
@@ -277,7 +290,8 @@
     "filename": "m31.jpg",
     "width": 6242,
     "height": 4173,
-    "sortOrder": 10
+    "sortOrder": 10,
+    "contextChart": "island-skies-astro/charts/m31-context"
   },
   {
     "id": "m42",
@@ -297,7 +311,8 @@
     "filename": "m42.jpg",
     "width": 4130,
     "height": 2800,
-    "sortOrder": 9
+    "sortOrder": 9,
+    "contextChart": "island-skies-astro/charts/m42-context"
   },
   {
     "id": "m42-2",
@@ -317,7 +332,8 @@
     "filename": "m42-2.jpg",
     "width": 4470,
     "height": 2980,
-    "sortOrder": 8
+    "sortOrder": 8,
+    "contextChart": "island-skies-astro/charts/m42-context"
   },
   {
     "id": "m45",
@@ -337,7 +353,8 @@
     "filename": "m45.jpg",
     "width": 4415,
     "height": 2948,
-    "sortOrder": 7
+    "sortOrder": 7,
+    "contextChart": "island-skies-astro/charts/m45-context"
   },
   {
     "id": "m51",
@@ -357,7 +374,8 @@
     "filename": "m51.jpg",
     "width": 4109,
     "height": 2806,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": "island-skies-astro/charts/m51-context"
   },
   {
     "id": "m8",
@@ -377,7 +395,8 @@
     "filename": "m8.jpg",
     "width": 4122,
     "height": 2812,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": "island-skies-astro/charts/m8-context"
   },
   {
     "id": "m83",
@@ -397,7 +416,8 @@
     "filename": "m83.jpg",
     "width": 4125,
     "height": 2814,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": "island-skies-astro/charts/m83-context"
   },
   {
     "id": "m97",
@@ -417,7 +437,8 @@
     "filename": "m97.jpg",
     "width": 4050,
     "height": 2750,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": "island-skies-astro/charts/m97-context"
   },
   {
     "id": "ngc1499",
@@ -437,7 +458,8 @@
     "filename": "ngc1499.jpg",
     "width": 6242,
     "height": 4170,
-    "sortOrder": 2
+    "sortOrder": 2,
+    "contextChart": "island-skies-astro/charts/ngc1499-context"
   },
   {
     "id": "ngc1977",
@@ -457,7 +479,8 @@
     "filename": "ngc1977.jpg",
     "width": 4161,
     "height": 2826,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": "island-skies-astro/charts/ngc1977-context"
   },
   {
     "id": "ngc2237",
@@ -477,7 +500,8 @@
     "filename": "ngc2237.jpg",
     "width": 5061,
     "height": 3379,
-    "sortOrder": 13
+    "sortOrder": 13,
+    "contextChart": "island-skies-astro/charts/ngc2237-context"
   },
   {
     "id": "ngc2264",
@@ -497,7 +521,8 @@
     "filename": "ngc2264.jpg",
     "width": 3836,
     "height": 2398,
-    "sortOrder": 3
+    "sortOrder": 3,
+    "contextChart": "island-skies-astro/charts/ngc2264-context"
   },
   {
     "id": "ngc2359",
@@ -517,7 +542,8 @@
     "filename": "ngc2359.jpg",
     "width": 4102,
     "height": 2794,
-    "sortOrder": 5
+    "sortOrder": 5,
+    "contextChart": "island-skies-astro/charts/ngc2359-context"
   },
   {
     "id": "ngc2467",
@@ -537,7 +563,8 @@
     "filename": "ngc2467.jpg",
     "width": 3840,
     "height": 2564,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": "island-skies-astro/charts/ngc2467-context"
   },
   {
     "id": "ngc281",
@@ -557,7 +584,8 @@
     "filename": "ngc281.jpg",
     "width": 4135,
     "height": 2817,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": "island-skies-astro/charts/ngc281-context"
   },
   {
     "id": "ngc3372",
@@ -577,7 +605,8 @@
     "filename": "ngc3372.jpg",
     "width": 2089,
     "height": 3745,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": "island-skies-astro/charts/ngc3372-context"
   },
   {
     "id": "ngc4565",
@@ -597,7 +626,8 @@
     "filename": "ngc4565.jpg",
     "width": 4130,
     "height": 2788,
-    "sortOrder": 11
+    "sortOrder": 11,
+    "contextChart": "island-skies-astro/charts/ngc4565-context"
   },
   {
     "id": "ngc6888",
@@ -617,7 +647,8 @@
     "filename": "ngc6888.jpg",
     "width": 4131,
     "height": 2816,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": "island-skies-astro/charts/ngc6888-context"
   },
   {
     "id": "ngc6960",
@@ -637,7 +668,8 @@
     "filename": "ngc6960.jpg",
     "width": 3931,
     "height": 2483,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": "island-skies-astro/charts/ngc6960-context"
   },
   {
     "id": "ngc6979",
@@ -657,7 +689,8 @@
     "filename": "ngc6979.jpg",
     "width": 4106,
     "height": 2768,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": "island-skies-astro/charts/ngc6979-context"
   },
   {
     "id": "ngc6992",
@@ -677,7 +710,8 @@
     "filename": "ngc6992.jpg",
     "width": 4129,
     "height": 2814,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": "island-skies-astro/charts/ngc6992-context"
   },
   {
     "id": "ngc7000-cygnus-wall",
@@ -697,7 +731,8 @@
     "filename": "ngc7000-cygnus-wall.jpg",
     "width": 4135,
     "height": 2811,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": "island-skies-astro/charts/ngc7000-context"
   },
   {
     "id": "ngc7293",
@@ -717,7 +752,8 @@
     "filename": "ngc7293.jpg",
     "width": 3862,
     "height": 2688,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": "island-skies-astro/charts/ngc7293-context"
   },
   {
     "id": "ngc7380",
@@ -737,7 +773,8 @@
     "filename": "ngc7380.jpg",
     "width": 4131,
     "height": 2813,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": "island-skies-astro/charts/ngc7380-context"
   },
   {
     "id": "ngc7635-hoo",
@@ -757,7 +794,8 @@
     "filename": "ngc7635-hoo.jpg",
     "width": 4090,
     "height": 2746,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": "island-skies-astro/charts/ngc7635-context"
   },
   {
     "id": "barnard68",
@@ -777,7 +815,8 @@
     "filename": "barnard68.jpg",
     "width": 4137,
     "height": 2816,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": "island-skies-astro/charts/barnard68-context"
   },
   {
     "id": "barnard72",
@@ -797,7 +836,8 @@
     "filename": "barnard72.jpg",
     "width": 4135,
     "height": 2815,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": "island-skies-astro/charts/barnard72-context"
   },
   {
     "id": "m86-markovianchain",
@@ -817,7 +857,8 @@
     "filename": "m86-markovianchain.jpg",
     "width": 4163,
     "height": 3295,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": "island-skies-astro/charts/m86-context"
   },
   {
     "id": "rhocomplex",
@@ -837,7 +878,8 @@
     "filename": "rhocomplex.jpg",
     "width": 6239,
     "height": 4169,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": "island-skies-astro/charts/rhocomplex-context"
   },
   {
     "id": "jupiter",
@@ -857,7 +899,8 @@
     "filename": "jupiter.jpg",
     "width": 900,
     "height": 643,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": null
   },
   {
     "id": "jupiter-grs",
@@ -877,7 +920,8 @@
     "filename": "jupiter-grs.jpg",
     "width": 900,
     "height": 643,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": null
   },
   {
     "id": "jupiter-grs-io",
@@ -897,7 +941,8 @@
     "filename": "jupiter-grs-io.jpg",
     "width": 1024,
     "height": 768,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": null
   },
   {
     "id": "jupiter-grs-io-shadow",
@@ -917,7 +962,8 @@
     "filename": "jupiter-grs-io-shadow.jpg",
     "width": 900,
     "height": 900,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": null
   },
   {
     "id": "jupiter-grs-io-shadow-europa",
@@ -937,7 +983,8 @@
     "filename": "jupiter-grs-io-shadow-europa.jpg",
     "width": 1256,
     "height": 706,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": null
   },
   {
     "id": "mars",
@@ -957,7 +1004,8 @@
     "filename": "mars.jpg",
     "width": 900,
     "height": 643,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": null
   },
   {
     "id": "saturn",
@@ -977,7 +1025,8 @@
     "filename": "saturn.jpg",
     "width": 900,
     "height": 643,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": null
   },
   {
     "id": "saturn-titan",
@@ -997,7 +1046,8 @@
     "filename": "saturn-titan.jpg",
     "width": 600,
     "height": 429,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": null
   },
   {
     "id": "venus",
@@ -1017,7 +1067,8 @@
     "filename": "venus.jpg",
     "width": 600,
     "height": 429,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": null
   },
   {
     "id": "moon-eclipse",
@@ -1037,7 +1088,8 @@
     "filename": "moon-eclipse.jpg",
     "width": 4608,
     "height": 2888,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": null
   },
   {
     "id": "moon-full",
@@ -1057,7 +1109,8 @@
     "filename": "moon-full.jpg",
     "width": 3040,
     "height": 2750,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": null
   },
   {
     "id": "moon-plato",
@@ -1077,7 +1130,8 @@
     "filename": "moon-plato.jpg",
     "width": 3800,
     "height": 2070,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": null
   },
   {
     "id": "moon-tycho",
@@ -1097,7 +1151,8 @@
     "filename": "moon-tycho.jpg",
     "width": 3800,
     "height": 2080,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": null
   },
   {
     "id": "c2025a6lemon",
@@ -1117,6 +1172,7 @@
     "filename": "c2025a6lemon.jpg",
     "width": 4144,
     "height": 2822,
-    "sortOrder": null
+    "sortOrder": null,
+    "contextChart": null
   }
 ]
