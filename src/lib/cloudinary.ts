@@ -2,7 +2,7 @@ const CLOUD_NAME = "jeffrwatts";
 const IMAGES_JSON_URL = `https://res.cloudinary.com/${CLOUD_NAME}/raw/upload/island-skies-astro/images.json`;
 
 export async function fetchImagesData(): Promise<RawImage[]> {
-  const res = await fetch(IMAGES_JSON_URL, { next: { revalidate: 3600 } });
+  const res = await fetch(IMAGES_JSON_URL, { next: { revalidate: 60 } });
   if (!res.ok) throw new Error(`Failed to fetch images.json: ${res.status}`);
   return res.json();
 }
