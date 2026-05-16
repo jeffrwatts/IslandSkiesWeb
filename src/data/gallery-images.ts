@@ -1,4 +1,4 @@
-import imagesData from "./images.json";
+import type { RawImage } from "@/lib/cloudinary";
 
 export type GalleryCategory = "dso" | "solar-system";
 
@@ -14,17 +14,19 @@ export interface GalleryImage {
   sortOrder?: number;
 }
 
-export const galleryImages: GalleryImage[] = imagesData.map((img) => ({
-  id: img.id,
-  title: img.title,
-  category: img.category as GalleryCategory,
-  cloudinaryId: img.cloudinaryId,
-  altText: img.altText,
-  catalogId: img.catalogId ?? undefined,
-  constellation: img.constellation ?? undefined,
-  objectType: img.objectType ?? undefined,
-  sortOrder: img.sortOrder ?? undefined,
-}));
+export function buildGalleryImages(rawData: RawImage[]): GalleryImage[] {
+  return rawData.map((img) => ({
+    id: img.id,
+    title: img.title,
+    category: img.category as GalleryCategory,
+    cloudinaryId: img.cloudinaryId,
+    altText: img.altText,
+    catalogId: img.catalogId ?? undefined,
+    constellation: img.constellation ?? undefined,
+    objectType: img.objectType ?? undefined,
+    sortOrder: img.sortOrder ?? undefined,
+  }));
+}
 
 function sortedDso(images: GalleryImage[]): GalleryImage[] {
   return images.sort((a, b) => {
@@ -34,18 +36,17 @@ function sortedDso(images: GalleryImage[]): GalleryImage[] {
   });
 }
 
-export function getImagesByCategory(category: GalleryCategory): GalleryImage[] {
-  const filtered = galleryImages.filter((img) => img.category === category);
-  return sortedDso(filtered);
+export function getImagesByCategory(images: GalleryImage[], category: GalleryCategory): GalleryImage[] {
+  return sortedDso(images.filter((img) => img.category === category));
 }
 
-export function getNebulaeImages(): GalleryImage[] {
-  return sortedDso(galleryImages.filter((img) => img.objectType === "nebula"));
+export function getNebulaeImages(images: GalleryImage[]): GalleryImage[] {
+  return sortedDso(images.filter((img) => img.objectType === "nebula"));
 }
 
-export function getGalaxiesAndClustersImages(): GalleryImage[] {
+export function getGalaxiesAndClustersImages(images: GalleryImage[]): GalleryImage[] {
   return sortedDso(
-    galleryImages.filter(
+    images.filter(
       (img) => img.objectType === "galaxy" || img.objectType === "cluster"
     )
   );

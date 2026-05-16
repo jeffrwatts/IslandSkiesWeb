@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import type { GalleryImage } from "@/data/gallery-images";
-import { getMetadataById } from "@/data/image-metadata";
+import { getMetadataById, type ImageMetadata } from "@/data/image-metadata";
 import ImageMetadataPanel from "./ImageMetadataPanel";
 import ImageZoomView from "./ImageZoomView";
 import { getCloudinaryUrl, getChartFullUrl } from "@/lib/cloudinary";
@@ -11,18 +11,20 @@ import { getCloudinaryUrl, getChartFullUrl } from "@/lib/cloudinary";
 export default function ImageDetailOverlay({
   image,
   images,
+  imageMetadata,
   onClose,
   onNavigate,
 }: {
   image: GalleryImage;
   images: GalleryImage[];
+  imageMetadata: ImageMetadata[];
   onClose: () => void;
   onNavigate: (id: string) => void;
 }) {
   const [zoomOpen, setZoomOpen] = useState(false);
   const [chartZoomOpen, setChartZoomOpen] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
-  const metadata = getMetadataById(image.id);
+  const metadata = getMetadataById(imageMetadata, image.id);
 
   // Reset loading state when image changes
   useEffect(() => {

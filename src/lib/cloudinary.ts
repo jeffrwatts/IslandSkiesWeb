@@ -1,4 +1,32 @@
 const CLOUD_NAME = "jeffrwatts";
+const IMAGES_JSON_URL = `https://res.cloudinary.com/${CLOUD_NAME}/raw/upload/island-skies-astro/images`;
+
+export async function fetchImagesData(): Promise<RawImage[]> {
+  const res = await fetch(IMAGES_JSON_URL, { next: { revalidate: 3600 } });
+  if (!res.ok) throw new Error(`Failed to fetch images.json: ${res.status}`);
+  return res.json();
+}
+
+export interface RawImage {
+  id: string;
+  title: string;
+  category: string;
+  cloudinaryId: string;
+  altText: string;
+  catalogId: string | null;
+  constellation: string | null;
+  objectType: string | null;
+  objectSubType: string | null;
+  sortOrder: number | null;
+  objectName: string;
+  ra: number | null;
+  dec: number | null;
+  contextChart: string | null;
+  filename: string;
+  width: number;
+  height: number;
+  region: string | null;
+}
 
 // Global loader for next/image — Cloudinary handles resize/format
 export default function cloudinaryLoader({

@@ -1,10 +1,13 @@
 import { Suspense } from "react";
 import {
+  buildGalleryImages,
   getNebulaeImages,
   getGalaxiesAndClustersImages,
   getImagesByCategory,
   filterByQuery,
 } from "@/data/gallery-images";
+import { buildImageMetadata } from "@/data/image-metadata";
+import { fetchImagesData } from "@/lib/cloudinary";
 import SearchBar from "@/components/gallery/SearchBar";
 import GalleryContent from "@/components/gallery/GalleryContent";
 import type { Metadata } from "next";
@@ -20,9 +23,13 @@ export default async function Home({
 }) {
   const { q } = await searchParams;
 
-  let nebulaeImages = getNebulaeImages();
-  let galaxiesImages = getGalaxiesAndClustersImages();
-  let solarImages = getImagesByCategory("solar-system");
+  const rawData = await fetchImagesData();
+  const allImages = buildGalleryImages(rawData);
+  const imageMetadata = buildImageMetadata(rawData);
+
+  let nebulaeImages = getNebulaeImages(allImages);
+  let galaxiesImages = getGalaxiesAndClustersImages(allImages);
+  let solarImages = getImagesByCategory(allImages, "solar-system");
 
   if (q) {
     nebulaeImages = filterByQuery(nebulaeImages, q);
@@ -40,6 +47,7 @@ export default async function Home({
           nebulaeImages={nebulaeImages}
           galaxiesImages={galaxiesImages}
           solarImages={solarImages}
+          imageMetadata={imageMetadata}
         />
       </Suspense>
     </div>

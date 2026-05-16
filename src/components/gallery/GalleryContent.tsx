@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import type { GalleryImage } from "@/data/gallery-images";
+import type { ImageMetadata } from "@/data/image-metadata";
 import GalleryGrid from "./GalleryGrid";
 import ImageDetailOverlay from "./ImageDetailOverlay";
 
@@ -14,10 +15,12 @@ export default function GalleryContent({
   nebulaeImages,
   galaxiesImages,
   solarImages,
+  imageMetadata,
 }: {
   nebulaeImages: GalleryImage[];
   galaxiesImages: GalleryImage[];
   solarImages: GalleryImage[];
+  imageMetadata: ImageMetadata[];
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -111,6 +114,7 @@ export default function GalleryContent({
         <ImageDetailOverlay
           image={selectedImage}
           images={activeImages}
+          imageMetadata={imageMetadata}
           onClose={closeImage}
           onNavigate={openImage}
         />
