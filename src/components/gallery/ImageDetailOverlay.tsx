@@ -119,12 +119,12 @@ export default function ImageDetailOverlay({
       <div className="flex-1 flex flex-col landscape:flex-row overflow-hidden min-h-0">
         {/* Image section */}
         <div
-          className="relative min-h-0 portrait:w-full portrait:aspect-[4/3] landscape:h-full landscape:max-w-[calc(100%-20rem)] landscape:flex landscape:items-center landscape:justify-center cursor-zoom-in"
+          className="relative min-h-0 portrait:w-full portrait:aspect-[4/3] landscape:flex-1 landscape:h-full landscape:max-w-[calc(100%-20rem)] landscape:flex landscape:items-center landscape:justify-center cursor-zoom-in"
           onClick={() => setZoomOpen(true)}
         >
-          {/* Loading spinner */}
+          {/* Loading placeholder */}
           {!imageLoaded && (
-            <div className="absolute inset-0 z-10 flex items-center justify-center">
+            <div className="absolute inset-0 z-10 flex items-center justify-center bg-white/5">
               <div className="w-8 h-8 border-2 border-white/20 border-t-white/80 rounded-full animate-spin" />
             </div>
           )}
