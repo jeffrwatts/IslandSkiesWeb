@@ -166,7 +166,7 @@ export default function ImageDetailOverlay({
         </div>
 
         {/* Metadata panel */}
-        <div className="flex-1 bg-card overflow-y-auto p-6 landscape:border-l border-white/10">
+        <div className="flex-1 landscape:flex-none landscape:w-80 bg-card overflow-y-auto p-6 landscape:border-l border-white/10">
           {metadata ? (
             <ImageMetadataPanel
               metadata={metadata}
