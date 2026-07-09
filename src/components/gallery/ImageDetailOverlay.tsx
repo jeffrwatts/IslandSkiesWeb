@@ -94,6 +94,8 @@ export default function ImageDetailOverlay({
         src={getCloudinaryUrl(image.cloudinaryId)}
         alt={image.altText}
         onClose={() => { exitFullscreen(); setZoomOpen(false); }}
+        onSwipeLeft={goToNext}
+        onSwipeRight={goToPrev}
       />
     );
   }

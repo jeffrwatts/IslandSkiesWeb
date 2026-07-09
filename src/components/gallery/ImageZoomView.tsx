@@ -9,21 +9,28 @@ import {
 
 // Native scale steps: 1x, 2x, 4x, 8x, then back to fit
 const ZOOM_STEPS = [1, 2, 4, 8];
+const SWIPE_THRESHOLD = 60;
 
 export default function ImageZoomView({
   src,
   alt,
   onClose,
+  onSwipeLeft,
+  onSwipeRight,
 }: {
   src: string;
   alt: string;
   onClose: () => void;
+  onSwipeLeft?: () => void;
+  onSwipeRight?: () => void;
 }) {
   const [displayScale, setDisplayScale] = useState<number | null>(null);
   const [baseRatio, setBaseRatio] = useState<number | null>(null);
   const imgRef = useRef<HTMLImageElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const transformRef = useRef<ReactZoomPanPinchRef>(null);
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
 
   const computeBaseRatio = useCallback(() => {
     const img = imgRef.current;
@@ -39,13 +46,20 @@ export default function ImageZoomView({
     setDisplayScale(fitScale);
   }, []);
 
+  // Reset zoom when navigating to a new image
+  useEffect(() => {
+    transformRef.current?.resetTransform(0);
+  }, [src]);
+
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") onClose();
+      if (e.key === "ArrowLeft") onSwipeRight?.();
+      if (e.key === "ArrowRight") onSwipeLeft?.();
     }
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [onClose]);
+  }, [onClose, onSwipeLeft, onSwipeRight]);
 
   useEffect(() => {
     function handleResize() {
@@ -57,6 +71,29 @@ export default function ImageZoomView({
   }, [computeBaseRatio]);
 
   const maxLibraryScale = baseRatio ? 8 / baseRatio : 20;
+
+  function handleTouchStart(e: React.TouchEvent) {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  }
+
+  function handleTouchEnd(e: React.TouchEvent) {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+    const deltaY = e.changedTouches[0].clientY - touchStartY.current;
+    touchStartX.current = null;
+    touchStartY.current = null;
+
+    const isAtFitScale = (transformRef.current?.state.scale ?? 1) < 1.05;
+    if (!isAtFitScale) return;
+    if (Math.abs(deltaX) < SWIPE_THRESHOLD || Math.abs(deltaX) < Math.abs(deltaY)) return;
+
+    if (deltaX < 0) {
+      onSwipeLeft?.();
+    } else {
+      onSwipeRight?.();
+    }
+  }
 
   function handlePillClick() {
     if (!baseRatio || !transformRef.current) return;
@@ -91,7 +128,11 @@ export default function ImageZoomView({
   }
 
   return (
-    <div className="fixed inset-0 z-[60] bg-black flex flex-col cursor-grab active:cursor-grabbing">
+    <div
+      className="fixed inset-0 z-[60] bg-black flex flex-col cursor-grab active:cursor-grabbing"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       <div className="absolute top-4 left-4 z-10 flex items-center gap-2">
         <button
           onClick={onClose}
