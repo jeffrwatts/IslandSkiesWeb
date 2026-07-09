@@ -24,6 +24,7 @@ export default function ImageZoomView({
 }) {
   const [displayScale, setDisplayScale] = useState<number | null>(null);
   const [baseRatio, setBaseRatio] = useState<number | null>(null);
+  const [atFitScale, setAtFitScale] = useState(true);
   const imgRef = useRef<HTMLImageElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const transformRef = useRef<ReactZoomPanPinchRef>(null);
@@ -142,11 +143,13 @@ export default function ImageZoomView({
           minScale={1}
           maxScale={maxLibraryScale}
           centerOnInit
+          panning={{ disabled: atFitScale }}
           wheel={{ step: 0.15 }}
           pinch={{ step: 5 }}
           onTransform={(_ref, state) => {
             if (baseRatio !== null) {
               setDisplayScale(baseRatio * state.scale);
+              setAtFitScale(state.scale < 1.05);
             }
           }}
         >
