@@ -40,6 +40,20 @@ export default function ImageZoomView({
   }, []);
 
   useEffect(() => {
+    const el = document.documentElement;
+    if (el.requestFullscreen) {
+      el.requestFullscreen().catch(() => {});
+    } else if ((el as Element & { webkitRequestFullscreen?: () => void }).webkitRequestFullscreen) {
+      (el as Element & { webkitRequestFullscreen: () => void }).webkitRequestFullscreen();
+    }
+    return () => {
+      if (document.fullscreenElement || (document as Document & { webkitFullscreenElement?: Element }).webkitFullscreenElement) {
+        document.exitFullscreen?.().catch(() => {});
+      }
+    };
+  }, []);
+
+  useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") onClose();
     }
