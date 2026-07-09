@@ -23,6 +23,21 @@ export default function ImageDetailOverlay({
 }) {
   const [zoomOpen, setZoomOpen] = useState(false);
   const [chartZoomOpen, setChartZoomOpen] = useState(false);
+
+  function enterFullscreen() {
+    const el = document.documentElement;
+    if (el.requestFullscreen) {
+      el.requestFullscreen().catch(() => {});
+    } else if ((el as Element & { webkitRequestFullscreen?: () => void }).webkitRequestFullscreen) {
+      (el as Element & { webkitRequestFullscreen: () => void }).webkitRequestFullscreen();
+    }
+  }
+
+  function exitFullscreen() {
+    if (document.fullscreenElement || (document as Document & { webkitFullscreenElement?: Element }).webkitFullscreenElement) {
+      document.exitFullscreen?.().catch(() => {});
+    }
+  }
   const [imageLoaded, setImageLoaded] = useState(false);
   const metadata = getMetadataById(imageMetadata, image.id);
 
@@ -77,7 +92,7 @@ export default function ImageDetailOverlay({
       <ImageZoomView
         src={getCloudinaryUrl(image.cloudinaryId)}
         alt={image.altText}
-        onClose={() => setZoomOpen(false)}
+        onClose={() => { exitFullscreen(); setZoomOpen(false); }}
       />
     );
   }
@@ -120,7 +135,7 @@ export default function ImageDetailOverlay({
         {/* Image section */}
         <div
           className="relative min-h-0 portrait:w-full portrait:aspect-[4/3] landscape:flex-1 landscape:h-full landscape:max-w-[calc(100%-20rem)] landscape:flex landscape:items-center landscape:justify-center cursor-zoom-in"
-          onClick={() => setZoomOpen(true)}
+          onClick={() => { enterFullscreen(); setZoomOpen(true); }}
         >
           {/* Loading placeholder */}
           {!imageLoaded && (
