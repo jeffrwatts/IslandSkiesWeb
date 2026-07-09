@@ -22,7 +22,7 @@ export default async function HomePage() {
   const solar = getImagesByCategory(allImages, "solar-system");
 
   const categories = [
-    { title: "Nebulae", href: "/gallery/nebulae", cover: nebulae[0], count: nebulae.length },
+    { title: "Nebulae", href: "/gallery/nebulae", cover: nebulae.find((img) => img.id === "m16-pillars-of-creation") ?? nebulae[0], count: nebulae.length },
     { title: "Galaxies & Star Clusters", href: "/gallery/galaxies", cover: galaxies[0], count: galaxies.length },
     { title: "Solar System", href: "/gallery/solar-system", cover: solar[0], count: solar.length },
   ];
