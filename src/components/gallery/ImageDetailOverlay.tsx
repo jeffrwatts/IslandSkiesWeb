@@ -28,13 +28,14 @@ export default function ImageDetailOverlay({
     const el = document.documentElement;
     if (el.requestFullscreen) {
       el.requestFullscreen().catch(() => {});
-    } else if ((el as Element & { webkitRequestFullscreen?: () => void }).webkitRequestFullscreen) {
-      (el as Element & { webkitRequestFullscreen: () => void }).webkitRequestFullscreen();
+    } else if ((el as unknown as { webkitRequestFullscreen?: () => void }).webkitRequestFullscreen) {
+      (el as unknown as { webkitRequestFullscreen: () => void }).webkitRequestFullscreen();
     }
   }
 
   function exitFullscreen() {
-    if (document.fullscreenElement || (document as Document & { webkitFullscreenElement?: Element }).webkitFullscreenElement) {
+    const doc = document as unknown as { webkitFullscreenElement?: Element };
+    if (document.fullscreenElement || doc.webkitFullscreenElement) {
       document.exitFullscreen?.().catch(() => {});
     }
   }
