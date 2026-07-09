@@ -48,8 +48,12 @@ export default function ImageZoomView({
   }, [onClose]);
 
   useEffect(() => {
-    window.addEventListener("resize", computeBaseRatio);
-    return () => window.removeEventListener("resize", computeBaseRatio);
+    function handleResize() {
+      computeBaseRatio();
+      transformRef.current?.resetTransform(0);
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, [computeBaseRatio]);
 
   const maxLibraryScale = baseRatio ? 8 / baseRatio : 20;
