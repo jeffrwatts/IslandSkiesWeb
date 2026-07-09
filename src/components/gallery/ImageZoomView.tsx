@@ -8,33 +8,25 @@ import {
 } from "react-zoom-pan-pinch";
 
 const ZOOM_STEPS = [1, 2, 4, 8];
-const SWIPE_THRESHOLD = 60;
 
 export default function ImageZoomView({
   src,
   alt,
   onClose,
-  onSwipeLeft,
-  onSwipeRight,
+  onPrev,
+  onNext,
 }: {
   src: string;
   alt: string;
   onClose: () => void;
-  onSwipeLeft?: () => void;
-  onSwipeRight?: () => void;
+  onPrev?: () => void;
+  onNext?: () => void;
 }) {
   const [displayScale, setDisplayScale] = useState<number | null>(null);
   const [baseRatio, setBaseRatio] = useState<number | null>(null);
   const imgRef = useRef<HTMLImageElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const transformRef = useRef<ReactZoomPanPinchRef>(null);
-
-  // Keep swipe callbacks in refs so native listeners never go stale
-  const onSwipeLeftRef = useRef(onSwipeLeft);
-  const onSwipeRightRef = useRef(onSwipeRight);
-  useEffect(() => { onSwipeLeftRef.current = onSwipeLeft; }, [onSwipeLeft]);
-  useEffect(() => { onSwipeRightRef.current = onSwipeRight; }, [onSwipeRight]);
 
   const computeBaseRatio = useCallback(() => {
     const img = imgRef.current;
@@ -56,12 +48,12 @@ export default function ImageZoomView({
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") onClose();
-      if (e.key === "ArrowLeft") onSwipeRightRef.current?.();
-      if (e.key === "ArrowRight") onSwipeLeftRef.current?.();
+      if (e.key === "ArrowLeft") onPrev?.();
+      if (e.key === "ArrowRight") onNext?.();
     }
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [onClose]);
+  }, [onClose, onPrev, onNext]);
 
   useEffect(() => {
     function handleResize() {
@@ -71,49 +63,6 @@ export default function ImageZoomView({
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [computeBaseRatio]);
-
-  // Native capture-phase listeners so we intercept before react-zoom-pan-pinch
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-
-    let startX = 0;
-    let startY = 0;
-
-    function onTouchStart(e: TouchEvent) {
-      // Let buttons handle their own touches normally
-      if ((e.target as Element).closest("button")) return;
-      // Only intercept single-finger touches at fit scale
-      if (e.touches.length !== 1) return;
-      const isAtFitScale = (transformRef.current?.state.scale ?? 1) < 1.05;
-      if (!isAtFitScale) return;
-
-      startX = e.touches[0].clientX;
-      startY = e.touches[0].clientY;
-      // Block the library from starting a pan so the image doesn't move
-      e.preventDefault();
-    }
-
-    function onTouchEnd(e: TouchEvent) {
-      if (!startX && !startY) return;
-      const deltaX = e.changedTouches[0].clientX - startX;
-      const deltaY = e.changedTouches[0].clientY - startY;
-      startX = 0;
-      startY = 0;
-
-      if (Math.abs(deltaX) < SWIPE_THRESHOLD || Math.abs(deltaX) < Math.abs(deltaY)) return;
-      if (deltaX < 0) onSwipeLeftRef.current?.();
-      else onSwipeRightRef.current?.();
-    }
-
-    // passive: false so we can call preventDefault() in touchstart
-    el.addEventListener("touchstart", onTouchStart, { passive: false, capture: true });
-    el.addEventListener("touchend", onTouchEnd, { passive: true, capture: true });
-    return () => {
-      el.removeEventListener("touchstart", onTouchStart, { capture: true });
-      el.removeEventListener("touchend", onTouchEnd, { capture: true });
-    };
-  }, []);
 
   const maxLibraryScale = baseRatio ? 8 / baseRatio : 20;
 
@@ -144,7 +93,8 @@ export default function ImageZoomView({
   }
 
   return (
-    <div ref={containerRef} className="fixed inset-0 z-[60] bg-black flex flex-col cursor-grab active:cursor-grabbing">
+    <div className="fixed inset-0 z-[60] bg-black flex flex-col">
+      {/* Top bar */}
       <div className="absolute top-4 left-4 z-10 flex items-center gap-2">
         <button
           onClick={onClose}
@@ -163,7 +113,29 @@ export default function ImageZoomView({
         )}
       </div>
 
-      <div className="flex-1 flex items-center justify-center" ref={wrapperRef}>
+      {/* Prev arrow */}
+      {onPrev && (
+        <button
+          onClick={onPrev}
+          className="absolute left-2 top-1/2 -translate-y-1/2 z-10 text-white/50 hover:text-white text-5xl p-2"
+          aria-label="Previous image"
+        >
+          &#8249;
+        </button>
+      )}
+
+      {/* Next arrow */}
+      {onNext && (
+        <button
+          onClick={onNext}
+          className="absolute right-2 top-1/2 -translate-y-1/2 z-10 text-white/50 hover:text-white text-5xl p-2"
+          aria-label="Next image"
+        >
+          &#8250;
+        </button>
+      )}
+
+      <div className="flex-1 flex items-center justify-center cursor-grab active:cursor-grabbing" ref={wrapperRef}>
         <TransformWrapper
           ref={transformRef}
           initialScale={1}
