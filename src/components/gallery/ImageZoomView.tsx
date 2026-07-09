@@ -81,23 +81,33 @@ export default function ImageZoomView({
     let startY = 0;
 
     function onTouchStart(e: TouchEvent) {
+      // Let buttons handle their own touches normally
+      if ((e.target as Element).closest("button")) return;
+      // Only intercept single-finger touches at fit scale
+      if (e.touches.length !== 1) return;
+      const isAtFitScale = (transformRef.current?.state.scale ?? 1) < 1.05;
+      if (!isAtFitScale) return;
+
       startX = e.touches[0].clientX;
       startY = e.touches[0].clientY;
+      // Block the library from starting a pan so the image doesn't move
+      e.preventDefault();
     }
 
     function onTouchEnd(e: TouchEvent) {
+      if (!startX && !startY) return;
       const deltaX = e.changedTouches[0].clientX - startX;
       const deltaY = e.changedTouches[0].clientY - startY;
+      startX = 0;
+      startY = 0;
 
-      const isAtFitScale = (transformRef.current?.state.scale ?? 1) < 1.05;
-      if (!isAtFitScale) return;
       if (Math.abs(deltaX) < SWIPE_THRESHOLD || Math.abs(deltaX) < Math.abs(deltaY)) return;
-
       if (deltaX < 0) onSwipeLeftRef.current?.();
       else onSwipeRightRef.current?.();
     }
 
-    el.addEventListener("touchstart", onTouchStart, { passive: true, capture: true });
+    // passive: false so we can call preventDefault() in touchstart
+    el.addEventListener("touchstart", onTouchStart, { passive: false, capture: true });
     el.addEventListener("touchend", onTouchEnd, { passive: true, capture: true });
     return () => {
       el.removeEventListener("touchstart", onTouchStart, { capture: true });
