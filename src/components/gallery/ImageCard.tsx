@@ -10,7 +10,7 @@ export default function ImageCard({
 }) {
   return (
     <div
-      className="relative aspect-[4/3] overflow-hidden bg-card cursor-pointer transition-opacity hover:opacity-90"
+      className="relative aspect-[4/3] rounded-lg overflow-hidden bg-card cursor-pointer transition-opacity hover:opacity-90"
       onClick={onClick}
     >
       <Image

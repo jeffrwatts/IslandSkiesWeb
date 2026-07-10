@@ -25,17 +25,16 @@ export default async function GalaxiesGalleryPage({
   if (q) images = filterByQuery(images, q);
 
   return (
-    <div className="w-full">
-      <div className="flex justify-end px-3 py-2">
-        <div className="w-48">
-          <Suspense>
-            <SearchBar />
-          </Suspense>
-        </div>
-      </div>
+    <div className="mx-auto max-w-7xl w-full px-4 py-6">
+      <h1 className="text-2xl font-bold text-foreground mb-4">Galaxies & Star Clusters</h1>
       <Suspense>
-        <GalleryContent images={images} imageMetadata={imageMetadata} />
+        <SearchBar />
       </Suspense>
+      <div className="mt-4">
+        <Suspense>
+          <GalleryContent images={images} imageMetadata={imageMetadata} />
+        </Suspense>
+      </div>
     </div>
   );
 }
