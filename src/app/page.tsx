@@ -28,13 +28,12 @@ export default async function HomePage() {
   ];
 
   return (
-    <main className="mx-auto max-w-7xl w-full px-4 py-8">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {categories.map(({ title, href, cover, count }) => (
+    <main className="h-screen grid grid-cols-1 md:grid-cols-3">
+      {categories.map(({ title, href, cover, count }) => (
           <Link
             key={href}
             href={href}
-            className="group relative aspect-[3/4] rounded-xl overflow-hidden block"
+            className="group relative overflow-hidden block"
           >
             {cover && (
               <Image
@@ -52,7 +51,6 @@ export default async function HomePage() {
             </div>
           </Link>
         ))}
-      </div>
     </main>
   );
 }
