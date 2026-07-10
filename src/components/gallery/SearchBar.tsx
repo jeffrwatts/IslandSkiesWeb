@@ -32,7 +32,7 @@ export default function SearchBar() {
       value={value}
       onChange={handleChange}
       placeholder="Search images..."
-      className="w-full rounded-lg bg-surface px-4 py-3 text-foreground placeholder:text-muted border border-transparent focus:border-accent focus:outline-none"
+      className="w-full rounded-lg bg-white/10 px-3 py-1.5 text-sm text-foreground placeholder:text-muted border border-transparent focus:border-accent focus:outline-none"
     />
   );
 }
