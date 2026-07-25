@@ -271,7 +271,6 @@ export default function ExplorerViewer({
   const [direction, setDirection] = useState<"forward" | "back">("forward");
   const [naturalSize, setNaturalSize] = useState<{ w: number; h: number } | null>(null);
   const pendingTarget = useRef<string | null>(null);
-  const fullscreenScrollRef = useRef<HTMLDivElement>(null);
 
   const currentImage = imageMap.get(stack[stack.length - 1])!;
 
@@ -319,13 +318,6 @@ export default function ExplorerViewer({
     return () => cancelAnimationFrame(id);
   }, [phase]);
 
-  useEffect(() => {
-    if (!isFullscreen || !naturalSize || !fullscreenScrollRef.current) return;
-    const el = fullscreenScrollRef.current;
-    const maxScroll = el.scrollWidth - el.clientWidth;
-    if (maxScroll > 0) el.scrollLeft = maxScroll / 2;
-  }, [isFullscreen, naturalSize]);
-
   const imgStyle: React.CSSProperties =
     phase === "exiting"
       ? { opacity: 0, transform: direction === "back" ? "scale(0.93)" : "scale(1.07)", transition: "opacity 280ms ease, transform 280ms ease" }
@@ -359,28 +351,14 @@ export default function ExplorerViewer({
 
   if (isFullscreen) {
     const ratio = naturalSize ? naturalSize.w / naturalSize.h : null;
-    // Image fills full screen height; in portrait the width overflows → horizontal scroll.
-    // In landscape the image is narrower than the viewport and is centered via mx-auto.
-    const contentWidth = ratio ? `calc(100dvh * ${ratio})` : "100%";
+    const innerStyle: React.CSSProperties = ratio
+      ? { width: `min(100%, calc(100vh * ${ratio}))`, aspectRatio: `${naturalSize!.w} / ${naturalSize!.h}` }
+      : { width: "100%" };
 
     return (
-      <div
-        ref={fullscreenScrollRef}
-        className="w-full h-full bg-black select-none overflow-x-auto"
-      >
-        <div className="relative h-full mx-auto" style={{ width: contentWidth }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={getCloudinaryUrl(currentImage.cloudinaryId)}
-            alt={currentImage.id}
-            className="block h-full w-auto"
-            style={imgStyle}
-            draggable={false}
-            onLoad={(e) => {
-              const el = e.currentTarget;
-              setNaturalSize({ w: el.naturalWidth, h: el.naturalHeight });
-            }}
-          />
+      <div className="w-full h-full flex items-center justify-center bg-black select-none">
+        <div className="relative overflow-hidden" style={innerStyle}>
+          <div className="overflow-hidden w-full">{img}</div>
           {overlay}
         </div>
       </div>
