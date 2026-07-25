@@ -39,8 +39,7 @@ export default function ExplorerWithExpand({ dataset }: { dataset: ExplorerDatas
     <div ref={containerRef} className="relative">
       <ExplorerViewer dataset={dataset} isFullscreen={isFullscreen} />
 
-      {/* Expand button — hidden once fullscreen (browser Esc exits) */}
-      {!isFullscreen && (
+      {!isFullscreen ? (
         <button
           onClick={expand}
           className="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 hover:bg-black/80 text-white text-xs px-3 py-1.5 rounded-full transition-colors"
@@ -53,6 +52,20 @@ export default function ExplorerWithExpand({ dataset }: { dataset: ExplorerDatas
             <path d="M11 11L7 7"     stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
           </svg>
           Expand
+        </button>
+      ) : (
+        <button
+          onClick={() => document.exitFullscreen?.()}
+          className="absolute top-3 right-3 flex items-center gap-1.5 bg-black/60 hover:bg-black/80 text-white text-xs px-3 py-1.5 rounded-full transition-colors"
+          title="Exit fullscreen"
+        >
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M4.5 1V4.5H1" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M7.5 11V7.5H11" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M4.5 4.5L1 1"   stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+            <path d="M7.5 7.5L11 11" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+          </svg>
+          Close
         </button>
       )}
     </div>
