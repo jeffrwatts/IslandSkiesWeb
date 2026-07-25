@@ -22,6 +22,44 @@ export interface ExplorerDataset {
 
 const datasets: ExplorerDataset[] = [
   {
+    id: "m8-m20",
+    rootId: "m8m20",
+    images: [
+      {
+        id: "m8m20",
+        cloudinaryId: "island-skies-astro/articles/m8-m20/m8m20",
+        width: 6202,
+        height: 4104,
+        annotations: [
+          {
+            label: "M20 – Trifid Nebula",
+            x: 1457,
+            y: 1302,
+            radius: 264,
+            targetId: "m20",
+          },
+          {
+            label: "M8 – Lagoon Nebula",
+            x: 3162,
+            y: 1550,
+            radius: 589,
+            targetId: "m8",
+          },
+        ],
+      },
+      {
+        id: "m8",
+        cloudinaryId: "island-skies-astro/articles/m8-m20/m8",
+        annotations: [],
+      },
+      {
+        id: "m20",
+        cloudinaryId: "island-skies-astro/articles/m8-m20/m20",
+        annotations: [],
+      },
+    ],
+  },
+  {
     id: "sadr-crescent",
     rootId: "ic1318",
     images: [
