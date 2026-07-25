@@ -3,12 +3,14 @@ import ArticleImage from "./mdx/ArticleImage";
 import ImageSection from "./mdx/ImageSection";
 import ImageCompare from "./mdx/ImageCompare";
 import ArticleSvg from "./mdx/ArticleSvg";
+import ImageExplorer from "./mdx/ImageExplorer";
 
 const components = {
   ArticleImage,
   ImageSection,
   ImageCompare,
   ArticleSvg,
+  ImageExplorer,
 };
 
 export default function ArticleBody({

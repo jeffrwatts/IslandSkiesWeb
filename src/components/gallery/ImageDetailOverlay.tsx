@@ -39,13 +39,10 @@ export default function ImageDetailOverlay({
       document.exitFullscreen?.().catch(() => {});
     }
   }
-  const [imageLoaded, setImageLoaded] = useState(false);
+  // Tracks which image ID has finished loading; resets automatically on image change
+  const [loadedImageId, setLoadedImageId] = useState<string | null>(null);
+  const imageLoaded = loadedImageId === image.id;
   const metadata = getMetadataById(imageMetadata, image.id);
-
-  // Reset loading state when image changes
-  useEffect(() => {
-    setImageLoaded(false);
-  }, [image.id]);
 
   const currentIndex = images.findIndex((img) => img.id === image.id);
 
@@ -154,7 +151,7 @@ export default function ImageDetailOverlay({
             className={`object-cover landscape:hidden transition-opacity duration-300 ${imageLoaded ? "opacity-100" : "opacity-0"}`}
             sizes="100vw"
             priority
-            onLoad={() => setImageLoaded(true)}
+            onLoad={() => setLoadedImageId(image.id)}
           />
           {/* Landscape: in-flow img — container wraps it, eliminating gap */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -163,7 +160,7 @@ export default function ImageDetailOverlay({
             alt={image.altText}
             className={`hidden landscape:block max-h-full max-w-full object-contain transition-opacity duration-300 ${imageLoaded ? "opacity-100" : "opacity-0"}`}
             fetchPriority="high"
-            onLoad={() => setImageLoaded(true)}
+            onLoad={() => setLoadedImageId(image.id)}
           />
 
           {/* Arrows overlaid on image for landscape/desktop */}

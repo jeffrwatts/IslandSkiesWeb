@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import type { GalleryImage } from "@/data/gallery-images";
 import type { ImageMetadata } from "@/data/image-metadata";
@@ -24,20 +24,10 @@ export default function GalleryContent({
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [activeTab, setActiveTab] = useState<CategoryTab>(
-    (VALID_TABS.includes(searchParams.get("tab") as CategoryTab)
-      ? searchParams.get("tab")
-      : "nebulae") as CategoryTab
-  );
-  const [selectedId, setSelectedId] = useState<string | null>(
-    searchParams.get("image")
-  );
 
-  useEffect(() => {
-    setSelectedId(searchParams.get("image"));
-    const tab = searchParams.get("tab") as CategoryTab;
-    if (VALID_TABS.includes(tab)) setActiveTab(tab);
-  }, [searchParams]);
+  const rawTab = searchParams.get("tab") as CategoryTab;
+  const activeTab: CategoryTab = VALID_TABS.includes(rawTab) ? rawTab : "nebulae";
+  const selectedId = searchParams.get("image");
 
   const imagesByTab: Record<CategoryTab, GalleryImage[]> = {
     nebulae: nebulaeImages,
@@ -53,7 +43,6 @@ export default function GalleryContent({
 
   const switchTab = useCallback(
     (tab: CategoryTab) => {
-      setActiveTab(tab);
       const params = new URLSearchParams(searchParams.toString());
       params.set("tab", tab);
       params.delete("image");
@@ -64,7 +53,6 @@ export default function GalleryContent({
 
   const openImage = useCallback(
     (id: string) => {
-      setSelectedId(id);
       const params = new URLSearchParams(searchParams.toString());
       params.set("image", id);
       router.replace(`?${params.toString()}`, { scroll: false });
@@ -73,7 +61,6 @@ export default function GalleryContent({
   );
 
   const closeImage = useCallback(() => {
-    setSelectedId(null);
     const params = new URLSearchParams(searchParams.toString());
     params.delete("image");
     const qs = params.toString();
