@@ -12,7 +12,7 @@ export default function ImageExplorer({ datasetId }: { datasetId: string }) {
   }
 
   return (
-    <figure className="my-10 rounded-lg overflow-hidden">
+    <figure className="my-10">
       <ExplorerWithExpand dataset={dataset} />
     </figure>
   );

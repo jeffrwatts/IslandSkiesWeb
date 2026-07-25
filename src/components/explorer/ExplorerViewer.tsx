@@ -366,8 +366,8 @@ export default function ExplorerViewer({
   }
 
   return (
-    <div className="relative w-full bg-black select-none">
-      <div className="overflow-hidden w-full">{img}</div>
+    <div className="relative w-full select-none">
+      <div className="overflow-hidden w-full rounded-lg bg-black">{img}</div>
       {overlay}
     </div>
   );
