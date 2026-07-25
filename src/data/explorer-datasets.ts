@@ -3,6 +3,7 @@ export interface ExplorerAnnotation {
   x: number;        // pixel x in the original image
   y: number;        // pixel y in the original image
   radius?: number;  // pixel radius of the annotation circle (omit for small dot)
+  labelPosition?: "top-left" | "top-right" | "bottom-left" | "bottom-right";
   targetId: string | null;
 }
 
@@ -36,6 +37,7 @@ const datasets: ExplorerDataset[] = [
             x: 2350,
             y: 1900,
             radius: 400,
+            labelPosition: "top-left",
             targetId: "m8",
           },
           {
@@ -43,18 +45,19 @@ const datasets: ExplorerDataset[] = [
             x: 4300,
             y: 2445,
             radius: 650,
+            labelPosition: "bottom-left",
             targetId: "m20",
           },
         ],
       },
       {
         id: "m8",
-        cloudinaryId: "island-skies-astro/articles/m8-m20/m8",
+        cloudinaryId: "island-skies-astro/articles/m8-m20/m20",
         annotations: [],
       },
       {
         id: "m20",
-        cloudinaryId: "island-skies-astro/articles/m8-m20/m20",
+        cloudinaryId: "island-skies-astro/articles/m8-m20/m8",
         annotations: [],
       },
     ],

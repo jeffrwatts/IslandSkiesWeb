@@ -102,11 +102,27 @@ function CircleLabel({
   const isNavigable = ann.targetId !== null;
   const xPct = (ann.x / imageWidth) * 100;
   const yPct = (ann.y / imageHeight) * 100;
-  const rPct = (ann.radius / imageWidth) * 100; // radius as % of image width
-  const labelLeft = xPct > 60;
+  const rXPct = (ann.radius / imageWidth) * 100;
+  const rYPct = (ann.radius / imageHeight) * 100;
 
-  // Anchor the label at the circle's left or right edge
-  const edgeXPct = labelLeft ? xPct - rPct : xPct + rPct;
+  // Determine anchor point on the circle edge and which side the label appears on
+  let edgeXPct: number;
+  let edgeYPct: number;
+  let labelLeft: boolean;
+  const pos = ann.labelPosition;
+  if (pos === "top-left" || pos === "bottom-left") {
+    edgeXPct = xPct - rXPct * 0.707;
+    edgeYPct = yPct + rYPct * (pos === "top-left" ? -0.707 : 0.707);
+    labelLeft = true;
+  } else if (pos === "top-right" || pos === "bottom-right") {
+    edgeXPct = xPct + rXPct * 0.707;
+    edgeYPct = yPct + rYPct * (pos === "top-right" ? -0.707 : 0.707);
+    labelLeft = false;
+  } else {
+    labelLeft = xPct > 60;
+    edgeXPct = labelLeft ? xPct - rXPct : xPct + rXPct;
+    edgeYPct = yPct;
+  }
 
   const handleClick = isNavigable ? () => onNavigate(ann.targetId!) : undefined;
 
@@ -128,8 +144,8 @@ function CircleLabel({
   // For a left label, anchor from the RIGHT edge of the container so the text
   // grows leftward. For a right label, anchor from the LEFT edge so it grows right.
   const containerStyle: React.CSSProperties = labelLeft
-    ? { position: "absolute", right: `${100 - edgeXPct}%`, top: `${yPct}%`, transform: "translateY(-50%)", pointerEvents: "none" }
-    : { position: "absolute", left: `${edgeXPct}%`, top: `${yPct}%`, transform: "translateY(-50%)", pointerEvents: "none" };
+    ? { position: "absolute", right: `${100 - edgeXPct}%`, top: `${edgeYPct}%`, transform: "translateY(-50%)", pointerEvents: "none" }
+    : { position: "absolute", left: `${edgeXPct}%`, top: `${edgeYPct}%`, transform: "translateY(-50%)", pointerEvents: "none" };
 
   return (
     <div style={containerStyle}>
