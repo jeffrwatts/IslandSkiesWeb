@@ -90,12 +90,19 @@ function Annotation({
 
 // ── Viewer ───────────────────────────────────────────────────────────────────
 
-export default function ExplorerViewer({ dataset }: { dataset: ExplorerDataset }) {
+export default function ExplorerViewer({
+  dataset,
+  isFullscreen = false,
+}: {
+  dataset: ExplorerDataset;
+  isFullscreen?: boolean;
+}) {
   const imageMap = new Map(dataset.images.map((img) => [img.id, img]));
 
   const [stack, setStack] = useState<string[]>([dataset.rootId]);
   const [phase, setPhase] = useState<"visible" | "exiting" | "entering">("visible");
   const [direction, setDirection] = useState<"forward" | "back">("forward");
+  const [naturalSize, setNaturalSize] = useState<{ w: number; h: number } | null>(null);
   const pendingTarget = useRef<string | null>(null);
 
   const currentImage = imageMap.get(stack[stack.length - 1])!;
@@ -129,6 +136,7 @@ export default function ExplorerViewer({ dataset }: { dataset: ExplorerDataset }
           direction === "back" ? prev.slice(0, -1) : [...prev, target]
         );
         pendingTarget.current = null;
+        setNaturalSize(null); // reset until next image loads
       }
       setPhase("entering");
     }, 280);
@@ -162,44 +170,76 @@ export default function ExplorerViewer({ dataset }: { dataset: ExplorerDataset }
           transition: "opacity 280ms ease, transform 280ms ease",
         };
 
+  const img = (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={getCloudinaryUrl(currentImage.cloudinaryId)}
+      alt={currentImage.id}
+      className="block w-full h-auto"
+      style={imgStyle}
+      draggable={false}
+      onLoad={(e) => {
+        const el = e.currentTarget;
+        setNaturalSize({ w: el.naturalWidth, h: el.naturalHeight });
+      }}
+    />
+  );
+
+  const overlay = phase === "visible" && (
+    <div className="absolute inset-0 pointer-events-none">
+      {currentImage.annotations.map((ann, i) => (
+        <Annotation key={i} ann={ann} onNavigate={navigate} />
+      ))}
+      {stack.length > 1 && (
+        <button
+          onClick={goBack}
+          className="absolute top-3 left-3 flex items-center gap-1.5 bg-black/60 hover:bg-black/80 text-white text-xs px-3 py-1.5 rounded-full transition-colors pointer-events-auto"
+        >
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path
+              d="M8 1L3 6L8 11"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          Back
+        </button>
+      )}
+    </div>
+  );
+
+  // ── Fullscreen layout ───────────────────────────────────────────────────────
+  // The container (100vw × 100vh) centres an inner box that matches the image's
+  // aspect ratio. Annotations are overlaid on the inner box, so x%/y% coordinates
+  // stay accurate regardless of letterboxing.
+  if (isFullscreen) {
+    const ratio = naturalSize ? naturalSize.w / naturalSize.h : null;
+    const innerStyle: React.CSSProperties = ratio
+      ? {
+          // Fit within the viewport while preserving aspect ratio.
+          // min(100vw, 100vh * ratio) gives the correct constrained width.
+          width: `min(100%, calc(100vh * ${ratio}))`,
+          aspectRatio: `${naturalSize!.w} / ${naturalSize!.h}`,
+        }
+      : { width: "100%" };
+
+    return (
+      <div className="w-full h-full flex items-center justify-center bg-black select-none">
+        <div className="relative overflow-hidden" style={innerStyle}>
+          <div className="overflow-hidden w-full">{img}</div>
+          {overlay}
+        </div>
+      </div>
+    );
+  }
+
+  // ── Embedded (article) layout ───────────────────────────────────────────────
   return (
     <div className="relative w-full bg-black select-none">
-      <div className="overflow-hidden w-full">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={getCloudinaryUrl(currentImage.cloudinaryId)}
-          alt={currentImage.id}
-          className="block w-full h-auto"
-          style={imgStyle}
-          draggable={false}
-        />
-      </div>
-
-      {phase === "visible" && (
-        <div className="absolute inset-0 pointer-events-none">
-          {currentImage.annotations.map((ann, i) => (
-            <Annotation key={i} ann={ann} onNavigate={navigate} />
-          ))}
-
-          {stack.length > 1 && (
-            <button
-              onClick={goBack}
-              className="absolute top-3 left-3 flex items-center gap-1.5 bg-black/60 hover:bg-black/80 text-white text-xs px-3 py-1.5 rounded-full transition-colors pointer-events-auto"
-            >
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path
-                  d="M8 1L3 6L8 11"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              Back
-            </button>
-          )}
-        </div>
-      )}
+      <div className="overflow-hidden w-full">{img}</div>
+      {overlay}
     </div>
   );
 }
