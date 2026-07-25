@@ -105,6 +105,8 @@ function CircleLabel({
   const rXPct = (ann.radius / imageWidth) * 100;
   const rYPct = (ann.radius / imageHeight) * 100;
 
+  const handleClick = isNavigable ? () => onNavigate(ann.targetId!) : undefined;
+
   // Determine anchor point on the circle edge and which side the label appears on
   let edgeXPct: number;
   let edgeYPct: number;
@@ -170,8 +172,6 @@ function CircleLabel({
     edgeXPct = labelLeft ? xPct - rXPct : xPct + rXPct;
     edgeYPct = yPct;
   }
-
-  const handleClick = isNavigable ? () => onNavigate(ann.targetId!) : undefined;
 
   const label = (
     <span
