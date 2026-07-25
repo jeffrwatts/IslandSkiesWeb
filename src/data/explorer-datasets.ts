@@ -3,7 +3,7 @@ export interface ExplorerAnnotation {
   x: number;        // pixel x in the original image
   y: number;        // pixel y in the original image
   radius?: number;  // pixel radius of the annotation circle (omit for small dot)
-  labelPosition?: "top-left" | "top-right" | "bottom-left" | "bottom-right";
+  labelPosition?: "top" | "bottom" | "top-left" | "top-right" | "bottom-left" | "bottom-right";
   targetId: string | null;
 }
 
@@ -37,7 +37,7 @@ const datasets: ExplorerDataset[] = [
             x: 2350,
             y: 1900,
             radius: 400,
-            labelPosition: "top-left",
+            labelPosition: "top",
             targetId: "m8",
           },
           {

@@ -110,6 +110,53 @@ function CircleLabel({
   let edgeYPct: number;
   let labelLeft: boolean;
   const pos = ann.labelPosition;
+
+  // Elbow style: vertical line out of top/bottom, right-angle turn, text runs right
+  if (pos === "top" || pos === "bottom") {
+    const anchorYPct = pos === "top" ? yPct - rYPct : yPct + rYPct;
+    const lineColor = "rgba(255,255,255,0.55)";
+    const lineLen = 16;
+    return (
+      <>
+        <div
+          style={{
+            position: "absolute",
+            left: `${xPct}%`,
+            top: `${anchorYPct}%`,
+            transform: pos === "top" ? "translate(-50%, -100%)" : "translate(-50%, 0%)",
+            width: 1,
+            height: lineLen,
+            backgroundColor: lineColor,
+            pointerEvents: "none",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            left: `${xPct}%`,
+            top: `${anchorYPct}%`,
+            transform: pos === "top" ? `translateY(calc(-100% - ${lineLen}px))` : `translateY(${lineLen}px)`,
+            display: "flex",
+            alignItems: "center",
+            gap: 4,
+            pointerEvents: isNavigable ? "auto" : "none",
+          }}
+        >
+          <div style={{ width: lineLen, height: 1, backgroundColor: lineColor, flexShrink: 0 }} />
+          <span
+            onClick={handleClick}
+            className={[
+              "text-xs whitespace-nowrap [text-shadow:0_1px_4px_rgba(0,0,0,0.9)]",
+              isNavigable ? "text-white cursor-pointer" : "text-white/60",
+            ].join(" ")}
+            style={{ pointerEvents: isNavigable ? "auto" : "none" }}
+          >
+            {ann.label}
+          </span>
+        </div>
+      </>
+    );
+  }
   if (pos === "top-left" || pos === "bottom-left") {
     edgeXPct = xPct - rXPct * 0.707;
     edgeYPct = yPct + rYPct * (pos === "top-left" ? -0.707 : 0.707);
