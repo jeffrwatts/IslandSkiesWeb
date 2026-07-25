@@ -35,7 +35,7 @@ const datasets: ExplorerDataset[] = [
             label: "NGC 6888 – Crescent Nebula",
             x: 5145,
             y: 3700,
-            radius: 250,
+            radius: 350,
             targetId: "ngc6888",
           },
         ],

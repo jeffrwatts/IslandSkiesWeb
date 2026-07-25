@@ -125,21 +125,16 @@ function CircleLabel({
 
   const tick = <div className="w-5 h-px bg-white/55 flex-shrink-0" />;
 
+  // For a left label, anchor from the RIGHT edge of the container so the text
+  // grows leftward. For a right label, anchor from the LEFT edge so it grows right.
+  const containerStyle: React.CSSProperties = labelLeft
+    ? { position: "absolute", right: `${100 - edgeXPct}%`, top: `${yPct}%`, transform: "translateY(-50%)", pointerEvents: "none" }
+    : { position: "absolute", left: `${edgeXPct}%`, top: `${yPct}%`, transform: "translateY(-50%)", pointerEvents: "none" };
+
   return (
-    <div
-      className="absolute"
-      style={{
-        left: `${edgeXPct}%`,
-        top: `${yPct}%`,
-        transform: "translateY(-50%)",
-        pointerEvents: "none",
-      }}
-    >
+    <div style={containerStyle}>
       {labelLeft ? (
-        <div
-          className="flex flex-row-reverse items-center gap-1.5"
-          style={{ pointerEvents: "none" }}
-        >
+        <div className="flex flex-row-reverse items-center gap-1.5" style={{ pointerEvents: "none" }}>
           {tick}
           <div style={{ pointerEvents: isNavigable ? "auto" : "none" }}>{label}</div>
         </div>
