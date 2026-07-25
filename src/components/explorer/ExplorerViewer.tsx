@@ -113,42 +113,44 @@ function CircleLabel({
   let labelLeft: boolean;
   const pos = ann.labelPosition;
 
-  // Elbow style: vertical line out of top/bottom, right-angle turn, text runs right
+  // Elbow style: single L-bracket (border-left + border-top/bottom), text runs right
   if (pos === "top" || pos === "bottom") {
     const anchorYPct = pos === "top" ? yPct - rYPct : yPct + rYPct;
     const lineColor = "rgba(255,255,255,0.55)";
     const lineLen = 16;
+    // Single div whose left border = vertical segment, top/bottom border = horizontal tick.
+    // The corner is where those two borders naturally meet — no gap.
+    const bracketStyle: React.CSSProperties = {
+      position: "absolute",
+      left: `${xPct}%`,
+      top: `${anchorYPct}%`,
+      transform: pos === "top" ? "translate(-0.5px, -100%)" : "translate(-0.5px, 0)",
+      width: lineLen,
+      height: lineLen,
+      borderLeft: `1px solid ${lineColor}`,
+      ...(pos === "top"
+        ? { borderTop: `1px solid ${lineColor}` }
+        : { borderBottom: `1px solid ${lineColor}` }),
+      boxSizing: "border-box" as const,
+      pointerEvents: "none",
+    };
+    const textStyle: React.CSSProperties = {
+      position: "absolute",
+      left: `calc(${xPct}% + ${lineLen}px)`,
+      top: `${anchorYPct}%`,
+      transform: pos === "top"
+        ? `translateY(calc(-${lineLen}px - 50%))`
+        : `translateY(calc(${lineLen}px - 50%))`,
+      pointerEvents: isNavigable ? "auto" : "none",
+    };
     return (
       <>
-        <div
-          style={{
-            position: "absolute",
-            left: `${xPct}%`,
-            top: `${anchorYPct}%`,
-            transform: pos === "top" ? "translate(-50%, -100%)" : "translate(-50%, 0%)",
-            width: 1,
-            height: lineLen,
-            backgroundColor: lineColor,
-            pointerEvents: "none",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            left: `${xPct}%`,
-            top: `${anchorYPct}%`,
-            transform: pos === "top" ? `translateY(calc(-100% - ${lineLen}px))` : `translateY(${lineLen}px)`,
-            display: "flex",
-            alignItems: "center",
-            gap: 4,
-            pointerEvents: isNavigable ? "auto" : "none",
-          }}
-        >
-          <div style={{ width: lineLen, height: 1, backgroundColor: lineColor, flexShrink: 0 }} />
+        <div style={bracketStyle} />
+        <div style={textStyle}>
           <span
             onClick={handleClick}
             className={[
-              "text-xs whitespace-nowrap [text-shadow:0_1px_4px_rgba(0,0,0,0.9)]",
+              "text-xs whitespace-nowrap pl-1 [text-shadow:0_1px_4px_rgba(0,0,0,0.9)]",
               isNavigable ? "text-white cursor-pointer" : "text-white/60",
             ].join(" ")}
             style={{ pointerEvents: isNavigable ? "auto" : "none" }}
