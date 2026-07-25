@@ -2,19 +2,26 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { getCloudinaryUrl } from "@/lib/cloudinary";
-import type { ExplorerAnnotation, ExplorerDataset } from "@/data/explorer-datasets";
+import type { ExplorerAnnotation, ExplorerImage, ExplorerDataset } from "@/data/explorer-datasets";
 
-// ── Annotation marker ────────────────────────────────────────────────────────
+// ── Small-dot annotation (no radius) ─────────────────────────────────────────
+// Positioned as a centred div at (x%, y%) of the image.
 
-function Annotation({
+function DotAnnotation({
   ann,
+  imageWidth,
+  imageHeight,
   onNavigate,
 }: {
   ann: ExplorerAnnotation;
-  onNavigate: (targetId: string) => void;
+  imageWidth?: number;
+  imageHeight?: number;
+  onNavigate: (id: string) => void;
 }) {
   const isNavigable = ann.targetId !== null;
-  const labelLeft = ann.x > 60;
+  const xPct = imageWidth ? (ann.x / imageWidth) * 100 : ann.x;
+  const yPct = imageHeight ? (ann.y / imageHeight) * 100 : ann.y;
+  const labelLeft = xPct > 60;
 
   const handleClick = isNavigable ? () => onNavigate(ann.targetId!) : undefined;
 
@@ -35,9 +42,7 @@ function Annotation({
       onClick={handleClick}
       className={[
         "text-xs whitespace-nowrap [text-shadow:0_1px_4px_rgba(0,0,0,0.9)]",
-        isNavigable
-          ? "text-white cursor-pointer"
-          : "text-white/60 cursor-default",
+        isNavigable ? "text-white cursor-pointer" : "text-white/60",
       ].join(" ")}
       style={{ pointerEvents: isNavigable ? "auto" : "none" }}
     >
@@ -51,38 +56,187 @@ function Annotation({
     <div
       className="absolute"
       style={{
-        left: `${ann.x}%`,
-        top: `${ann.y}%`,
+        left: `${xPct}%`,
+        top: `${yPct}%`,
         transform: "translate(-50%, -50%)",
         pointerEvents: "none",
       }}
     >
-      <div style={{ pointerEvents: isNavigable ? "auto" : "none" }}>
-        {circle}
-      </div>
+      <div style={{ pointerEvents: isNavigable ? "auto" : "none" }}>{circle}</div>
 
-      {labelLeft && (
+      {labelLeft ? (
         <div
           className="absolute right-full top-1/2 -translate-y-1/2 flex flex-row-reverse items-center gap-1.5"
-          style={{ marginRight: "4px", pointerEvents: "none" }}
+          style={{ marginRight: 4, pointerEvents: "none" }}
         >
           {tick}
-          <div style={{ pointerEvents: isNavigable ? "auto" : "none" }}>
-            {label}
-          </div>
+          <div style={{ pointerEvents: isNavigable ? "auto" : "none" }}>{label}</div>
         </div>
-      )}
-
-      {!labelLeft && (
+      ) : (
         <div
           className="absolute left-full top-1/2 -translate-y-1/2 flex items-center gap-1.5"
-          style={{ marginLeft: "4px", pointerEvents: "none" }}
+          style={{ marginLeft: 4, pointerEvents: "none" }}
         >
           {tick}
-          <div style={{ pointerEvents: isNavigable ? "auto" : "none" }}>
-            {label}
-          </div>
+          <div style={{ pointerEvents: isNavigable ? "auto" : "none" }}>{label}</div>
         </div>
+      )}
+    </div>
+  );
+}
+
+// ── Large-circle annotation label (circle drawn in SVG, label in HTML) ────────
+// The label is anchored to the edge of the circle rather than the centre.
+
+function CircleLabel({
+  ann,
+  imageWidth,
+  imageHeight,
+  onNavigate,
+}: {
+  ann: ExplorerAnnotation & { radius: number };
+  imageWidth: number;
+  imageHeight: number;
+  onNavigate: (id: string) => void;
+}) {
+  const isNavigable = ann.targetId !== null;
+  const xPct = (ann.x / imageWidth) * 100;
+  const yPct = (ann.y / imageHeight) * 100;
+  const rPct = (ann.radius / imageWidth) * 100; // radius as % of image width
+  const labelLeft = xPct > 60;
+
+  // Anchor the label at the circle's left or right edge
+  const edgeXPct = labelLeft ? xPct - rPct : xPct + rPct;
+
+  const handleClick = isNavigable ? () => onNavigate(ann.targetId!) : undefined;
+
+  const label = (
+    <span
+      onClick={handleClick}
+      className={[
+        "text-xs whitespace-nowrap [text-shadow:0_1px_4px_rgba(0,0,0,0.9)]",
+        isNavigable ? "text-white cursor-pointer" : "text-white/60",
+      ].join(" ")}
+      style={{ pointerEvents: isNavigable ? "auto" : "none" }}
+    >
+      {ann.label}
+    </span>
+  );
+
+  const tick = <div className="w-5 h-px bg-white/55 flex-shrink-0" />;
+
+  return (
+    <div
+      className="absolute"
+      style={{
+        left: `${edgeXPct}%`,
+        top: `${yPct}%`,
+        transform: "translateY(-50%)",
+        pointerEvents: "none",
+      }}
+    >
+      {labelLeft ? (
+        <div
+          className="flex flex-row-reverse items-center gap-1.5"
+          style={{ pointerEvents: "none" }}
+        >
+          {tick}
+          <div style={{ pointerEvents: isNavigable ? "auto" : "none" }}>{label}</div>
+        </div>
+      ) : (
+        <div className="flex items-center gap-1.5" style={{ pointerEvents: "none" }}>
+          {tick}
+          <div style={{ pointerEvents: isNavigable ? "auto" : "none" }}>{label}</div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── Annotation overlay ────────────────────────────────────────────────────────
+
+function AnnotationOverlay({
+  image,
+  onNavigate,
+  onBack,
+  showBack,
+}: {
+  image: ExplorerImage;
+  onNavigate: (id: string) => void;
+  onBack: () => void;
+  showBack: boolean;
+}) {
+  const { annotations, width, height } = image;
+  const largeCircles = annotations.filter(
+    (a): a is ExplorerAnnotation & { radius: number } =>
+      typeof a.radius === "number" && !!width && !!height
+  );
+  const dots = annotations.filter((a) => typeof a.radius !== "number");
+
+  return (
+    <div className="absolute inset-0 pointer-events-none">
+      {/* SVG layer: large circle rings, drawn in native image pixels */}
+      {largeCircles.length > 0 && width && height && (
+        <svg
+          className="absolute inset-0 w-full h-full"
+          viewBox={`0 0 ${width} ${height}`}
+          preserveAspectRatio="none"
+        >
+          {largeCircles.map((ann, i) => (
+            <circle
+              key={i}
+              cx={ann.x}
+              cy={ann.y}
+              r={ann.radius}
+              fill="none"
+              stroke="rgba(255,255,255,0.75)"
+              strokeWidth={8}
+            />
+          ))}
+        </svg>
+      )}
+
+      {/* HTML layer: labels for large circles */}
+      {largeCircles.map((ann, i) =>
+        width && height ? (
+          <CircleLabel
+            key={i}
+            ann={ann}
+            imageWidth={width}
+            imageHeight={height}
+            onNavigate={onNavigate}
+          />
+        ) : null
+      )}
+
+      {/* HTML layer: small dot annotations */}
+      {dots.map((ann, i) => (
+        <DotAnnotation
+          key={i}
+          ann={ann}
+          imageWidth={width}
+          imageHeight={height}
+          onNavigate={onNavigate}
+        />
+      ))}
+
+      {/* Back button */}
+      {showBack && (
+        <button
+          onClick={onBack}
+          className="absolute top-3 left-3 flex items-center gap-1.5 bg-black/60 hover:bg-black/80 text-white text-xs px-3 py-1.5 rounded-full transition-colors pointer-events-auto"
+        >
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path
+              d="M8 1L3 6L8 11"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          Back
+        </button>
       )}
     </div>
   );
@@ -136,7 +290,7 @@ export default function ExplorerViewer({
           direction === "back" ? prev.slice(0, -1) : [...prev, target]
         );
         pendingTarget.current = null;
-        setNaturalSize(null); // reset until next image loads
+        setNaturalSize(null);
       }
       setPhase("entering");
     }, 280);
@@ -153,22 +307,10 @@ export default function ExplorerViewer({
 
   const imgStyle: React.CSSProperties =
     phase === "exiting"
-      ? {
-          opacity: 0,
-          transform: direction === "back" ? "scale(0.93)" : "scale(1.07)",
-          transition: "opacity 280ms ease, transform 280ms ease",
-        }
+      ? { opacity: 0, transform: direction === "back" ? "scale(0.93)" : "scale(1.07)", transition: "opacity 280ms ease, transform 280ms ease" }
       : phase === "entering"
-      ? {
-          opacity: 0,
-          transform: direction === "back" ? "scale(1.05)" : "scale(0.96)",
-          transition: "none",
-        }
-      : {
-          opacity: 1,
-          transform: "scale(1)",
-          transition: "opacity 280ms ease, transform 280ms ease",
-        };
+      ? { opacity: 0, transform: direction === "back" ? "scale(1.05)" : "scale(0.96)", transition: "none" }
+      : { opacity: 1, transform: "scale(1)", transition: "opacity 280ms ease, transform 280ms ease" };
 
   const img = (
     // eslint-disable-next-line @next/next/no-img-element
@@ -186,43 +328,18 @@ export default function ExplorerViewer({
   );
 
   const overlay = phase === "visible" && (
-    <div className="absolute inset-0 pointer-events-none">
-      {currentImage.annotations.map((ann, i) => (
-        <Annotation key={i} ann={ann} onNavigate={navigate} />
-      ))}
-      {stack.length > 1 && (
-        <button
-          onClick={goBack}
-          className="absolute top-3 left-3 flex items-center gap-1.5 bg-black/60 hover:bg-black/80 text-white text-xs px-3 py-1.5 rounded-full transition-colors pointer-events-auto"
-        >
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-            <path
-              d="M8 1L3 6L8 11"
-              stroke="currentColor"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          Back
-        </button>
-      )}
-    </div>
+    <AnnotationOverlay
+      image={currentImage}
+      onNavigate={navigate}
+      onBack={goBack}
+      showBack={stack.length > 1}
+    />
   );
 
-  // ── Fullscreen layout ───────────────────────────────────────────────────────
-  // The container (100vw × 100vh) centres an inner box that matches the image's
-  // aspect ratio. Annotations are overlaid on the inner box, so x%/y% coordinates
-  // stay accurate regardless of letterboxing.
   if (isFullscreen) {
     const ratio = naturalSize ? naturalSize.w / naturalSize.h : null;
     const innerStyle: React.CSSProperties = ratio
-      ? {
-          // Fit within the viewport while preserving aspect ratio.
-          // min(100vw, 100vh * ratio) gives the correct constrained width.
-          width: `min(100%, calc(100vh * ${ratio}))`,
-          aspectRatio: `${naturalSize!.w} / ${naturalSize!.h}`,
-        }
+      ? { width: `min(100%, calc(100vh * ${ratio}))`, aspectRatio: `${naturalSize!.w} / ${naturalSize!.h}` }
       : { width: "100%" };
 
     return (
@@ -235,7 +352,6 @@ export default function ExplorerViewer({
     );
   }
 
-  // ── Embedded (article) layout ───────────────────────────────────────────────
   return (
     <div className="relative w-full bg-black select-none">
       <div className="overflow-hidden w-full">{img}</div>
