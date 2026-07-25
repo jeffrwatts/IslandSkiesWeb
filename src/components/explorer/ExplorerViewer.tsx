@@ -183,9 +183,11 @@ function AnnotationOverlay({
               cx={ann.x}
               cy={ann.y}
               r={ann.radius}
-              fill="none"
+              fill="transparent"
               stroke="rgba(255,255,255,0.75)"
               strokeWidth={8}
+              style={ann.targetId ? { pointerEvents: "auto", cursor: "pointer" } : { pointerEvents: "none" }}
+              onClick={ann.targetId ? () => onNavigate(ann.targetId!) : undefined}
             />
           ))}
         </svg>
