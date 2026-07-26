@@ -52,12 +52,12 @@ const datasets: ExplorerDataset[] = [
       },
       {
         id: "m8",
-        cloudinaryId: "island-skies-astro/articles/m8-m20/m20",
+        cloudinaryId: "island-skies-astro/articles/m8-m20/m8",
         annotations: [],
       },
       {
         id: "m20",
-        cloudinaryId: "island-skies-astro/articles/m8-m20/m8",
+        cloudinaryId: "island-skies-astro/articles/m8-m20/m20",
         annotations: [],
       },
     ],
