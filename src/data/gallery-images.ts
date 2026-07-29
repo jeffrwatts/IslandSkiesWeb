@@ -14,13 +14,6 @@ export interface GalleryImage {
   sortOrder?: number;
 }
 
-// Local overrides for sort position — takes precedence over the value in images.json
-const SORT_ORDER_OVERRIDES: Record<string, number> = {
-  "rhoophiuchi": 2,
-  "m16": 3,
-  "m16-pillars": 4,
-};
-
 export function buildGalleryImages(rawData: RawImage[]): GalleryImage[] {
   return rawData.map((img) => ({
     id: img.id,
@@ -31,7 +24,7 @@ export function buildGalleryImages(rawData: RawImage[]): GalleryImage[] {
     catalogId: img.catalogId ?? undefined,
     constellation: img.constellation ?? undefined,
     objectType: img.objectType ?? undefined,
-    sortOrder: SORT_ORDER_OVERRIDES[img.id] ?? img.sortOrder ?? undefined,
+    sortOrder: img.sortOrder ?? undefined,
   }));
 }
 
