@@ -244,7 +244,7 @@ function AnnotationOverlay({
         >
           {largeCircles.map((ann, i) => (
             <g key={i}>
-              {/* Sonar-ping ring for clickable circles */}
+              {/* Sonar-ping ring: SMIL animates r and stroke-opacity in SVG space */}
               {ann.targetId && (
                 <circle
                   cx={ann.x}
@@ -253,8 +253,27 @@ function AnnotationOverlay({
                   fill="transparent"
                   stroke="rgba(255,255,255,0.6)"
                   strokeWidth={8}
-                  className="explorer-circle-ping"
-                />
+                  style={{ pointerEvents: "none" }}
+                >
+                  <animate
+                    attributeName="r"
+                    from={String(ann.radius)}
+                    to={String(ann.radius * 1.25)}
+                    dur="2s"
+                    calcMode="spline"
+                    keySplines="0 0 0.2 1"
+                    repeatCount="indefinite"
+                  />
+                  <animate
+                    attributeName="stroke-opacity"
+                    from="0.6"
+                    to="0"
+                    dur="2s"
+                    calcMode="spline"
+                    keySplines="0 0 0.2 1"
+                    repeatCount="indefinite"
+                  />
+                </circle>
               )}
               <circle
                 cx={ann.x}
