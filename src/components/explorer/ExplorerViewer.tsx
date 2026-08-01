@@ -243,17 +243,30 @@ function AnnotationOverlay({
           preserveAspectRatio="none"
         >
           {largeCircles.map((ann, i) => (
-            <circle
-              key={i}
-              cx={ann.x}
-              cy={ann.y}
-              r={ann.radius}
-              fill="transparent"
-              stroke="rgba(255,255,255,0.75)"
-              strokeWidth={8}
-              style={ann.targetId ? { pointerEvents: "auto", cursor: "pointer" } : { pointerEvents: "none" }}
-              onClick={ann.targetId ? () => onNavigate(ann.targetId!) : undefined}
-            />
+            <g key={i}>
+              {/* Sonar-ping ring for clickable circles */}
+              {ann.targetId && (
+                <circle
+                  cx={ann.x}
+                  cy={ann.y}
+                  r={ann.radius}
+                  fill="transparent"
+                  stroke="rgba(255,255,255,0.6)"
+                  strokeWidth={8}
+                  className="explorer-circle-ping"
+                />
+              )}
+              <circle
+                cx={ann.x}
+                cy={ann.y}
+                r={ann.radius}
+                fill="transparent"
+                stroke="rgba(255,255,255,0.75)"
+                strokeWidth={8}
+                style={ann.targetId ? { pointerEvents: "auto", cursor: "pointer" } : { pointerEvents: "none" }}
+                onClick={ann.targetId ? () => onNavigate(ann.targetId!) : undefined}
+              />
+            </g>
           ))}
         </svg>
       )}
@@ -355,7 +368,7 @@ export default function ExplorerViewer({
         setNaturalSize(null);
       }
       setPhase("entering");
-    }, 280);
+    }, 450);
     return () => clearTimeout(timer);
   }, [phase, direction]);
 
@@ -369,10 +382,10 @@ export default function ExplorerViewer({
 
   const imgStyle: React.CSSProperties =
     phase === "exiting"
-      ? { opacity: 0, transform: direction === "back" ? "scale(0.93)" : "scale(1.07)", transition: "opacity 280ms ease, transform 280ms ease" }
+      ? { opacity: 0, transform: direction === "back" ? "scale(0.85)" : "scale(1.18)", transition: "opacity 450ms ease, transform 450ms ease" }
       : phase === "entering"
-      ? { opacity: 0, transform: direction === "back" ? "scale(1.05)" : "scale(0.96)", transition: "none" }
-      : { opacity: 1, transform: "scale(1)", transition: "opacity 280ms ease, transform 280ms ease" };
+      ? { opacity: 0, transform: direction === "back" ? "scale(1.15)" : "scale(0.85)", transition: "none" }
+      : { opacity: 1, transform: "scale(1)", transition: "opacity 450ms ease, transform 450ms ease" };
 
   const img = (
     // eslint-disable-next-line @next/next/no-img-element
