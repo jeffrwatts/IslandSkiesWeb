@@ -2,7 +2,6 @@ import {
   buildGalleryImages,
   getNebulaeImages,
   getGalaxiesAndClustersImages,
-  getImagesByCategory,
 } from "@/data/gallery-images";
 import { buildImageMetadata } from "@/data/image-metadata";
 import { fetchImagesData } from "@/lib/cloudinary";
@@ -20,13 +19,11 @@ export default async function Home() {
 
   const nebulaeImages = getNebulaeImages(allImages);
   const galaxiesImages = getGalaxiesAndClustersImages(allImages);
-  const solarImages = getImagesByCategory(allImages, "solar-system");
 
   return (
     <HomeGallery
       nebulaeImages={nebulaeImages}
       galaxiesImages={galaxiesImages}
-      solarImages={solarImages}
       imageMetadata={imageMetadata}
     />
   );

@@ -6,15 +6,14 @@ import type { GalleryImage } from "@/data/gallery-images";
 import type { ImageMetadata } from "@/data/image-metadata";
 import ImageDetailOverlay from "./ImageDetailOverlay";
 
-type CategoryKey = "nebulae" | "galaxies" | "solar";
+type CategoryKey = "nebulae" | "galaxies";
 
-const DURATION = 420;
-const PICKS_PER_CAT = 4;
+const DURATION = 700;
+const PICKS_PER_CAT = 3; // 3 rows × 2 cols = 6 images filling the viewport
 
 const LABELS: Record<CategoryKey, string> = {
   nebulae: "Nebulae",
   galaxies: "Galaxies & Clusters",
-  solar: "Solar System",
 };
 
 function scatterStyle(i: number, total: number): React.CSSProperties {
@@ -31,12 +30,10 @@ function scatterStyle(i: number, total: number): React.CSSProperties {
 export default function HomeGallery({
   nebulaeImages,
   galaxiesImages,
-  solarImages,
   imageMetadata,
 }: {
   nebulaeImages: GalleryImage[];
   galaxiesImages: GalleryImage[];
-  solarImages: GalleryImage[];
   imageMetadata: ImageMetadata[];
 }) {
   const [view, setView] = useState<"main" | "category">("main");
@@ -45,40 +42,44 @@ export default function HomeGallery({
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const busy = useRef(false);
 
-  // Interleave 4 picks from each category across the 6×2 wall
+  // Checkerboard interleave: row 0 → N,G; row 1 → G,N; row 2 → N,G …
+  // so neither column is always the same type
   const mainImages: GalleryImage[] = [];
-  for (let i = 0; i < PICKS_PER_CAT; i++) {
-    if (nebulaeImages[i]) mainImages.push(nebulaeImages[i]);
-    if (galaxiesImages[i]) mainImages.push(galaxiesImages[i]);
-    if (solarImages[i]) mainImages.push(solarImages[i]);
+  for (let row = 0; row < PICKS_PER_CAT; row++) {
+    if (row % 2 === 0) {
+      if (nebulaeImages[row]) mainImages.push(nebulaeImages[row]);
+      if (galaxiesImages[row]) mainImages.push(galaxiesImages[row]);
+    } else {
+      if (galaxiesImages[row]) mainImages.push(galaxiesImages[row]);
+      if (nebulaeImages[row]) mainImages.push(nebulaeImages[row]);
+    }
   }
 
   const catImages: Record<CategoryKey, GalleryImage[]> = {
     nebulae: nebulaeImages,
     galaxies: galaxiesImages,
-    solar: solarImages,
   };
 
   const activeCatImages = catImages[activeCategory];
 
   const itemStyle = (i: number, total: number): React.CSSProperties => {
-    const transition: React.CSSProperties = {
+    const base: React.CSSProperties = {
       transition: `transform ${DURATION}ms cubic-bezier(0.4,0,0.2,1), opacity ${DURATION}ms ease`,
     };
-    if (scattered) return { ...transition, ...scatterStyle(i, total) };
-    return { ...transition, transform: "none", opacity: 1 };
+    if (scattered) return { ...base, ...scatterStyle(i, total) };
+    return { ...base, transform: "none", opacity: 1 };
   };
 
   const switchToCategory = useCallback((cat: CategoryKey) => {
     if (busy.current) return;
     busy.current = true;
     setActiveCategory(cat);
-    setScattered(true); // scatter out whatever is visible
+    setScattered(true);
     setTimeout(() => {
-      setView("category"); // new content renders while scattered=true (starts at offset)
+      setView("category");
       requestAnimationFrame(() =>
         requestAnimationFrame(() => {
-          setScattered(false); // category images animate into place
+          setScattered(false);
           busy.current = false;
         })
       );
@@ -88,12 +89,12 @@ export default function HomeGallery({
   const goBack = useCallback(() => {
     if (busy.current) return;
     busy.current = true;
-    setScattered(true); // scatter out category
+    setScattered(true);
     setTimeout(() => {
-      setView("main"); // main renders scattered
+      setView("main");
       requestAnimationFrame(() =>
         requestAnimationFrame(() => {
-          setScattered(false); // main animates in
+          setScattered(false);
           busy.current = false;
         })
       );
@@ -103,12 +104,12 @@ export default function HomeGallery({
   const clickMainImage = useCallback(
     (image: GalleryImage) => {
       if (busy.current) return;
-      let cat: CategoryKey = "nebulae";
-      if (galaxiesImages.some((g) => g.id === image.id)) cat = "galaxies";
-      else if (solarImages.some((s) => s.id === image.id)) cat = "solar";
+      const cat: CategoryKey = galaxiesImages.some((g) => g.id === image.id)
+        ? "galaxies"
+        : "nebulae";
       switchToCategory(cat);
     },
-    [galaxiesImages, solarImages, switchToCategory]
+    [galaxiesImages, switchToCategory]
   );
 
   const selectedImage = selectedId
@@ -118,12 +119,19 @@ export default function HomeGallery({
   return (
     <div className="w-full">
       {view === "main" ? (
-        <div className="grid grid-cols-3 md:grid-cols-6">
+        // 2-col grid that fills viewport height below the header
+        <div
+          className="grid grid-cols-2"
+          style={{
+            height: "calc(100vh - 4rem)",
+            gridTemplateRows: `repeat(${PICKS_PER_CAT}, 1fr)`,
+          }}
+        >
           {mainImages.map((img, i) => (
             <div
               key={img.id}
               style={itemStyle(i, mainImages.length)}
-              className="relative aspect-[4/3] overflow-hidden cursor-pointer group"
+              className="relative overflow-hidden cursor-pointer group"
               onClick={() => clickMainImage(img)}
             >
               <Image
@@ -131,7 +139,7 @@ export default function HomeGallery({
                 alt={img.altText}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
-                sizes="(max-width: 768px) 33vw, 17vw"
+                sizes="50vw"
               />
             </div>
           ))}
@@ -147,7 +155,7 @@ export default function HomeGallery({
               ← Back
             </button>
             <span className="text-white/20">|</span>
-            {(["nebulae", "galaxies", "solar"] as CategoryKey[]).map((cat) => (
+            {(["nebulae", "galaxies"] as CategoryKey[]).map((cat) => (
               <button
                 key={cat}
                 onClick={() => cat !== activeCategory && switchToCategory(cat)}
