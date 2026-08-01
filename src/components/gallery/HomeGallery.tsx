@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import Image from "next/image";
 import type { GalleryImage } from "@/data/gallery-images";
 import type { ImageMetadata } from "@/data/image-metadata";
@@ -111,6 +111,13 @@ export default function HomeGallery({
     },
     [galaxiesImages, switchToCategory]
   );
+
+  // Logo click on home page dispatches "go-home" — handle it here
+  useEffect(() => {
+    const handler = () => { if (view === "category") goBack(); };
+    window.addEventListener("go-home", handler);
+    return () => window.removeEventListener("go-home", handler);
+  }, [view, goBack]);
 
   const selectedImage = selectedId
     ? activeCatImages.find((img) => img.id === selectedId) ?? null

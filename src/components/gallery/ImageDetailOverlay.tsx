@@ -103,10 +103,10 @@ export default function ImageDetailOverlay({
       <div className="flex-shrink-0 flex items-center justify-between px-4 py-2">
         <button
           onClick={onClose}
-          className="text-white/70 hover:text-white text-3xl leading-none p-1"
-          aria-label="Close"
+          className="text-white/70 hover:text-white text-sm flex items-center gap-1.5 p-1"
+          aria-label="Back"
         >
-          &times;
+          ← Back
         </button>
         <div className="flex items-center gap-4">
           {/* Arrows in top bar for portrait/mobile only */}
