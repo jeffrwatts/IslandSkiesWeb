@@ -69,8 +69,8 @@ export default function GalleryContent({
 
   const tabs: { id: CategoryTab; label: string }[] = [
     { id: "nebulae", label: "Nebulae" },
-    { id: "solar-system", label: "Solar System" },
     { id: "galaxies-clusters", label: "Galaxies & Clusters" },
+    { id: "solar-system", label: "Solar System" },
   ];
 
   return (
